@@ -5,12 +5,13 @@ from t_jugador import t_jugador
 from t_jugadorDAO import t_jugadorDAO
 from t_gamemaster import t_gamemaster
 from t_gamemasterDAO import t_gamemasterDAO
+from menu_ejecucion import menu_ejecucion
 
 coneccion.getStartConnection()
 jugador_dao = t_jugadorDAO()
 gamemaster_dao = t_gamemasterDAO()
 
-ingresoSistema = True
+enFunconamiento = True
 
 def ingresoUsuario():
     os.system('cls')
@@ -19,8 +20,10 @@ def ingresoUsuario():
     nnUsuario = input('#: ')
     print('Ingrese su Contraseña:')
     ccUsuario = input('#: ')
-    if jugador_dao.comprobarUsuario(nnUsuario,ccUsuario) or gamemaster_dao.comprobarUsuario(nnUsuario,ccUsuario):
-        print('Bienvenido_')
+    if jugador_dao.comprobarUsuario(nnUsuario,ccUsuario):
+        menu = menu_ejecucion(enFunconamiento,'Jugador',nnUsuario,'Crear Personaje')
+    elif gamemaster_dao.comprobarUsuario(nnUsuario,ccUsuario):
+        menu = menu_ejecucion(enFunconamiento,'GM',nnUsuario,'Ver Personajes')
 
 def crearUsuario():
     os.system('cls')
@@ -53,8 +56,9 @@ def creacionUsuario(tipo):
     cc = input('#: ')
 
     if tipo == 'gamemaster':
-        print('Inserte de que va su historia: ')
+        print('Inserte de que va su historia:')
         lore = input('#: ')
+
         id_gm = gamemaster_dao.buscarID()
         nuevoGM = t_gamemaster(id_gm,nick,cc,lore)
         gamemaster_dao.crearGM(nuevoGM)
@@ -64,7 +68,7 @@ def creacionUsuario(tipo):
         jugador_dao.crearJugador(nuevoPersonaje) 
 
 # Menu ---------------------------------------->>
-while(ingresoSistema):
+while(enFunconamiento):
     time.sleep(2)
     os.system('cls')
     print('<<-----------------------<< Menu Crear Usuario >>----------------------->>')
@@ -81,8 +85,6 @@ while(ingresoSistema):
         crearUsuario()
     elif seleccion == '3':
         print('Cerrando Sistema, Hasta Pronto')
-        ingresoSistema = False
+        enFunconamiento = False
     else:
         print('Valor Ingresado no Valido: '+seleccion)
-
-
