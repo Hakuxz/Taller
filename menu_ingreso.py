@@ -19,7 +19,8 @@ def ingresoUsuario():
     nnUsuario = input('#: ')
     print('Ingrese su Contraseña:')
     ccUsuario = input('#: ')
-    jugador_dao.comprobar_usuario(nnUsuario,ccUsuario)
+    if jugador_dao.comprobarUsuario(nnUsuario,ccUsuario) or gamemaster_dao.comprobarUsuario(nnUsuario,ccUsuario):
+        print('Bienvenido_')
 
 def crearUsuario():
     os.system('cls')
@@ -43,7 +44,7 @@ def creacionUsuario(tipo):
     if jugador_dao.buscarNombre(nick):
         print('El Nombre de Usuario ya se encuentra en Uso')
         return
-    elif gamemaster_dao.buscarNombre(nick):
+    if gamemaster_dao.buscarNombre(nick):
         print('El Nombre de Usuario ya se encuentra en Uso')
         return
     #---Final verificacion de Nickname--->>

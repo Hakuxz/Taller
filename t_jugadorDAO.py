@@ -27,3 +27,16 @@ class t_jugadorDAO:
                     return True
                 else:
                     return False
+
+    def comprobarUsuario(self,nombre,cc):
+        for row in coneccion.cursor.execute('select * from JUGADOR'):
+            if row[1] == nombre:
+                if row[2] == cc:
+                    return True
+                else:
+                    print('Usuario No Valido')
+                    return False
+            else:
+                print('Nickname Ingresado No Valido')
+                return False
+
