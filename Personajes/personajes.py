@@ -13,7 +13,7 @@ class razas:
         self.__resistencia = resistencia
 
     @property # ------------------------------------->>
-    def id(self) -> str:
+    def id(self) -> int:
         return self.__id_pj
 
     @property # ------------------------------------->>
