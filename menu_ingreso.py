@@ -44,10 +44,7 @@ def creacionUsuario(tipo):
     nick = input('#: ').lower()
 
     #---Inicio verificacion de Nickname--->>
-    if jugador_dao.buscarNombre(nick):
-        print('El Nombre de Usuario ya se encuentra en Uso')
-        return
-    if gamemaster_dao.buscarNombre(nick):
+    if gamemaster_dao.buscarNombre(nick) or jugador_dao.buscarNombre(nick):
         print('El Nombre de Usuario ya se encuentra en Uso')
         return
     #---Final verificacion de Nickname--->>
