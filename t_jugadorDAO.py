@@ -1,4 +1,3 @@
-from ast import Num
 from coneccion import coneccion
 from beautifultable import BeautifulTable
 from t_jugador import t_jugador
@@ -12,26 +11,19 @@ class t_jugadorDAO:
         coneccion.connection.commit()
         print('Jugador Creado con Exito!')
 
-    def comprobar_usuario(self,nombre,cc): # comprobar usuario
-        for row in coneccion.cursor.execute('select CONTRASEÑA from JUGADOR where nombre=:1',[nombre]):
-            tabla.rows.append(row)
-        print(tabla)
-        coneccion.cursor.execute('select CONTRASEÑA from JUGADOR where nombre=:1',[nombre])
-        #if _cc == cc:
-        print(nombre + ' y ' + cc) 
-      #  row = coneccion.cursor.fetchone()
-      #  if row == None:
-      #      print('No se ha encontrado el propietario, por favor verificar el rut e intentar denuevo')
-      #  else:
-      #      tabla.rows.append(row)
-      #  print(tabla)
-
     def tablas(self): # Dibujar tabla
         for row in coneccion.cursor.execute('select * from JUGADOR'):
             tabla.rows.append(row)
         print(tabla)
 
     def buscarID(self) -> int:
-        if coneccion.cursor.execute('select ID_JUGADOR from JUGADOR where ID_JUGADOR=(select max(ID_JUGADOR) from JUGADOR)') != Num:
-            print('ok')
-        
+        for row in coneccion.cursor.execute('select ID_JUGADOR from JUGADOR where ID_JUGADOR=(select max(ID_JUGADOR) from JUGADOR)'):
+            return row[0]+1
+
+    def buscarNombre(self,nombre):
+        for row in coneccion.cursor.execute('select NOMBRE_JUGADOR from JUGADOR'):
+            for i in row:
+                if i == nombre:
+                    return True
+                else:
+                    return False
