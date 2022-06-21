@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 class t_gamemaster:
     def __init__(self,id_gm,nombre,contrasena,historias):
         self.__id_gm = id_gm
@@ -21,27 +20,3 @@ class t_gamemaster:
     @property # ------------------------------------->>
     def historias(self) -> str:
         return self.__historias
-=======
-class t_gamemaster:
-    def __init__(self,id_gm,nombre,contrasena,historias):
-        self.__id_gm = id_gm
-        self.__nombre = nombre
-        self.__contrasena = contrasena
-        self.__historias = historias
-
-    @property # ------------------------------------->>
-    def id_gm(self) -> str:
-        return self.__id_gm
-
-    @property # ------------------------------------->>
-    def nombre(self) -> str:
-        return self.__nombre
-
-    @property # ------------------------------------->>
-    def contrasena(self) -> str:
-        return self.__contrasena
-
-    @property # ------------------------------------->>
-    def historias(self) -> str:
-        return self.__historias
->>>>>>> 6a1aa426e26295b2e64db0e0d0ccef8adcf8fef4

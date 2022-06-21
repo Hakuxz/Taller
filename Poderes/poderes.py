@@ -1,4 +1,4 @@
-class habilidades:
+class poderes:
     def __init__(self,id_poder,nombre,detalle):
         self.__id_poder = id_poder
         self.__nombre = nombre
