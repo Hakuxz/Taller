@@ -1,5 +1,5 @@
 class personajes:
-    def __init__(self,id_pj,nombre,estado,nivel,inteligencia,sabiduria,carisma,experiencia,fuerza,destreza,resistencia):
+    def __init__(self,id_pj,nombre,estado,nivel,inteligencia,sabiduria,carisma,experiencia,fuerza,destreza,resistencia,id_jugador,equipo,raza):
         self.__id_pj = id_pj
         self.__nombre = nombre
         self.__estado = estado
@@ -11,6 +11,9 @@ class personajes:
         self.__fuerza = fuerza
         self.__destreza = destreza
         self.__resistencia = resistencia
+        self.__id_jugador = id_jugador
+        self.__equipo = equipo
+        self.__raza = raza
 
     @property # ------------------------------------->>
     def id(self) -> int:
@@ -55,3 +58,15 @@ class personajes:
     @property # ------------------------------------->>
     def resistencia(self) -> str:
         return self.__resistencia
+
+    @property # ------------------------------------->>
+    def id_jugador(self) -> str:
+        return self.__id_jugador
+
+    @property # ------------------------------------->>
+    def equipo(self) -> str:
+        return self.__equipo
+
+    @property # ------------------------------------->>
+    def raza(self) -> str:
+        return self.__raza

@@ -18,3 +18,7 @@ class razasDao:
                                  task.id_raza, task.nombre, task.fuerza, task.destreza, task.resistencia, task.detalle, task.habilidad, task.poder])
         coneccion.connection.commit()
         print('Raza Creada con Exito!')
+
+    def obtenerRaza(self, raza):
+        for row in coneccion.cursor.execute('select * from RAZA where ID_RAZA=:1', [raza]):
+            return row
