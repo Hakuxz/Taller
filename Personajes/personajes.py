@@ -16,7 +16,7 @@ class personajes:
         self.__raza = raza
 
     @property # ------------------------------------->>
-    def id(self) -> int:
+    def id(self):
         return self.__id_pj
 
     @property # ------------------------------------->>
@@ -68,5 +68,5 @@ class personajes:
         return self.__equipo
 
     @property # ------------------------------------->>
-    def raza(self) -> str:
+    def raza(self):
         return self.__raza

@@ -40,3 +40,6 @@ class t_jugadorDAO:
                 print('Nickname Ingresado No Valido')
                 return False
 
+    def obtenerID(self,nombre):
+        for row in coneccion.cursor.execute('select ID_JUGADOR from JUGADOR where NOMBRE_JUGADOR=:1',[nombre]):
+            return row[0]

@@ -8,20 +8,17 @@ tabla.columns.header = ['ID', 'Nombre', 'Estado', 'Nivel', 'Inteligencia',
 
 
 class personajesDao:
-    def mostrar(self):  # Dibujar tabla
+    def mostrar(self): # Dibujar tabla Personaje
         for row in coneccion.cursor.execute('select * from PERSONAJE'):
             tabla.rows.append(row)
         print(tabla)
 
-    def crear(self, task, nombre, inteligencia, sabiduria, carisma, fuerza, destreza, resistencia, raza):  # Crear Personaje
-        coneccion.cursor.execute('insert into PERSONAJE values(:1, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11)', [
-                                 task.id_pj, task.nombre, task.estado, task.nivel, task.inteligencia, task.sabiduria, task.carisma, task.experiencia, task.fuerza, task.destreza, task.resistencia, task.id_jugador, task.equipo, task.raza])
+    def crear(self, task): # Crear Personaje
+        coneccion.cursor.execute('insert into PERSONAJE values(:1, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11, :12, :13, :14)', [
+                                 task.id, task.nombre, task.estado, task.nivel, task.inteligencia, task.sabiduria, task.carisma, task.experiencia, task.fuerza, task.destreza, task.resistencia, task.id_jugador, task.equipo, task.raza])
         coneccion.connection.commit()
         print('Personaje Creado con Exito!')
 
     def buscarID(self) -> int:
         for row in coneccion.cursor.execute('select ID_PERSONAJE from PERSONAJE where ID_PERSONAJE=(select max(ID_PERSONAJE) from PERSONAJE)'):
-            if not row[0]:
-                return print(0)
-            else:
-                return print(row[0]+1)
+            return int(row[0]+1)

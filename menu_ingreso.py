@@ -21,9 +21,9 @@ def ingresoUsuario():
     print('Ingrese su Contraseña:')
     ccUsuario = input('#: ')
     if jugador_dao.comprobarUsuario(nnUsuario,ccUsuario):
-        menu = menu_jugador(enFunconamiento,nnUsuario)
+        menu = menu_jugador(enFunconamiento,nnUsuario,jugador_dao.obtenerID(nnUsuario))
     elif gamemaster_dao.comprobarUsuario(nnUsuario,ccUsuario):
-        menu = menu_jugador(enFunconamiento,nnUsuario)
+        menu = menu_jugador(enFunconamiento,nnUsuario,jugador_dao.obtenerID(nnUsuario))
 
 def crearUsuario():
     os.system('cls')
@@ -81,7 +81,9 @@ while(enFunconamiento):
     elif seleccion == '2':
         crearUsuario()
     elif seleccion == '3':
+        os.system('cls')
         print('Cerrando Sistema, Hasta Pronto')
         enFunconamiento = False
     else:
         print('Valor Ingresado no Valido: '+seleccion)
+        time.sleep(2)
