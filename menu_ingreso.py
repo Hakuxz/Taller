@@ -15,9 +15,9 @@ enFunconamiento = True
 
 def ingresoUsuario():
     os.system('cls')
-    print('<<---------------------<< Menu Ingresar Usuario >>---------------------->>')
+    print('<<---------------------<< Menu Ing2resar Usuario >>---------------------->>')
     print('Ingrese su Nombre de Usuario:')
-    nnUsuario = input('#: ')
+    nnUsuario = input('#: ').lower()
     print('Ingrese su Contraseña:')
     ccUsuario = input('#: ')
     if jugador_dao.comprobarUsuario(nnUsuario,ccUsuario):
@@ -25,7 +25,7 @@ def ingresoUsuario():
     elif gamemaster_dao.comprobarUsuario(nnUsuario,ccUsuario):
         menu = menu_jugador(enFunconamiento,nnUsuario,jugador_dao.obtenerID(nnUsuario))
 
-def crearUsuario():
+def crearUsuario(): # Paso 1
     os.system('cls')
     print('<<-----------------------<< Menu Crear Usuario >>----------------------->>')
     print('1.- Crear usuario GameMaster')
@@ -38,7 +38,7 @@ def crearUsuario():
     else:
         print('Valor Ingresado no Valido: '+seleccion)
 
-def creacionUsuario(tipo):
+def creacionUsuario(tipo): # Paso 2
     os.system('cls')
     print('Seleccione un NickName:')
     nick = input('#: ').lower()
