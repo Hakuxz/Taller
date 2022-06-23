@@ -83,8 +83,7 @@ class menu_jugador():
             os.system('cls')
             print(id_jugador)
             print('>> Bienvenido Jugador: ' + nombre + ' >>')
-            print(
-                '<<------------------------------<< Menu >>------------------------------>>')
+            print('>> Menu >>')
             print(
                 'Seleccione que opcion desea ingresando el numero corrrespondiente a esta:')
             print('1.- Crear Personajes')
@@ -94,15 +93,15 @@ class menu_jugador():
             print('5.- Habilidades')
             print('6.- Equipos')
             print('7.- Salir')
-            print(
-                '<<------------------------------<< Menu >>------------------------------>>')
+            print('>> Menu >>')
             seleccion = input('#: ')
             os.system('cls')
             if seleccion == '1':
                 crearPersonaje(id_jugador)
                 pausarYvolver()
             elif seleccion == '2':
-                pass
+                personaje_dao.mostrarPersonajesJugador(id_jugador)
+                pausarYvolver()
             elif seleccion == '3':
                 raza_dao.mostrar()
                 pausarYvolver()

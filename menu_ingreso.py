@@ -15,7 +15,7 @@ enFunconamiento = True
 
 def ingresoUsuario():
     os.system('cls')
-    print('<<---------------------<< Menu Ing2resar Usuario >>---------------------->>')
+    print('<<---------------------<< Menu Ingresar Usuario >>---------------------->>')
     print('Ingrese su Nombre de Usuario:')
     nnUsuario = input('#: ').lower()
     print('Ingrese su Contraseña:')
@@ -68,7 +68,7 @@ def creacionUsuario(tipo): # Paso 2
 while(enFunconamiento):
     time.sleep(2)
     os.system('cls')
-    print('<<-----------------------<< Menu Crear Usuario >>----------------------->>')
+    print('<<-----------------------<< Menu >>----------------------->>')
     print('Seleccione que opcion desea ingresando el numero corrrespondiente a esta:')
     print('1.- Ingresar Usuario')
     print('2.- Crear Usuario')
