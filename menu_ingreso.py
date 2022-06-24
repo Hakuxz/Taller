@@ -6,6 +6,7 @@ from t_jugadorDAO import t_jugadorDAO
 from t_gamemaster import t_gamemaster
 from t_gamemasterDAO import t_gamemasterDAO
 from menu_jugador import menu_jugador
+from menu_gamemaster import menu_gamemaster
 
 coneccion.getStartConnection()
 jugador_dao = t_jugadorDAO()
@@ -17,13 +18,13 @@ def ingresoUsuario():
     os.system('cls')
     print('>> Ingresar Usuario >>')
     print('Ingrese su Nombre de Usuario:')
-    nnUsuario = input('#: ').upper()
+    nnUsuario = input('#: ').upper() # Ingreso Nickname en Mayuscula
     print('Ingrese su Contraseña:')
     ccUsuario = input('#: ')
     if jugador_dao.comprobarUsuario(nnUsuario,ccUsuario):
         menu = menu_jugador(enFunconamiento,nnUsuario,jugador_dao.obtenerID(nnUsuario))
     elif gamemaster_dao.comprobarUsuario(nnUsuario,ccUsuario):
-        menu = menu_jugador(enFunconamiento,nnUsuario,jugador_dao.obtenerID(nnUsuario))
+        menu = menu_gamemaster(enFunconamiento,nnUsuario,jugador_dao.obtenerID(nnUsuario))
     else:
         print('Los Datos Ingresado no Coinciden')
 
@@ -46,7 +47,7 @@ def crearUsuario(): # Paso 1
 def creacionUsuario(tipo): # Paso 2
     os.system('cls')
     print('Seleccione un NickName:')
-    nick = input('#: ').upper()
+    nick = input('#: ').upper() # Ingreso Nickname en Mayuscula
 
     #---Inicio verificacion de Nickname--->>
     if gamemaster_dao.buscarNombre(nick) or jugador_dao.buscarNombre(nick):
@@ -55,7 +56,7 @@ def creacionUsuario(tipo): # Paso 2
     #---Final verificacion de Nickname--->>
 
     print('Cree su Contraseña:')
-    cc = input('#: ')
+    cc = input('#: ') # Ingreso Contraseña
 
     if tipo == 'gamemaster':
         print('Inserte de que va su historia:')

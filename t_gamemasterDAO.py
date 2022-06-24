@@ -22,7 +22,7 @@ class t_gamemasterDAO:
             return row[0]+1
     
     def buscarNombre(self,nombre):
-        for row in coneccion.cursor.execute('select NOMBRE_GAMEMASTER from GAMEMASTER'):
+        for row in coneccion.cursor.execute('select NOMBRE_GAMEMASTER from GAMEMASTER where NOMBRE_GAMEMASTER=:1',[nombre]):
             if not row:
                 return False
             else:

@@ -114,7 +114,7 @@ class menu_jugador():
                 equipo_dao.mostrar()
                 pausarYvolver()
             elif seleccion == '7':
-                print('>> Hasta Luego ' + nombre + '>>')
+                print('>> Hasta Luego ' + nombre + ' >>')
                 enFuncionamiento = False
             else:
                 print('Valor Ingresado no Valido: '+seleccion)
