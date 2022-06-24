@@ -70,7 +70,7 @@ def crearPersonaje(id_jugador):
                     atributos[0] += raza_dao.buscarFuerza(id_raza)
                     atributos[1] += raza_dao.buscarDestreza(id_raza)
                     atributos[2] += raza_dao.buscarResistencia(id_raza)
-                    nuevo_personaje = personajes(personaje_dao.buscarID(), nombre_personaje, 1, 1, int(atributos[3]), int(atributos[4]), int(atributos[5]), 0, int(atributos[0]), int(atributos[1]), int(atributos[2]), int(id_jugador), 0, int(id_raza))
+                    nuevo_personaje = personajes(personaje_dao.buscarID(), nombre_personaje, '1', 1, int(atributos[3]), int(atributos[4]), int(atributos[5]), 0, int(atributos[0]), int(atributos[1]), int(atributos[2]), int(id_jugador), 0, int(id_raza))
                     personaje_dao.crear(nuevo_personaje)
                     return
     # Fin Creacion del Personaje
