@@ -15,7 +15,7 @@ class personajesDao:
             tabla.rows.append(row)
         print(tabla)
 
-    def mostrarPersonajesJugador(self,id_jugador):
+    def mostrarPersonajesJugador(self,id_jugador): # Mostrar Tabla Resumen Jugador
         for row in coneccion.cursor.execute('select * from PERSONAJE where ID_JUGADOR=:1',[id_jugador]):
             mostrar = [row[1],row[3],row[4],row[5],row[6],row[8],row[9],row[10],row[13],row[12]]
             tablaResumen.rows.append(mostrar)
@@ -27,6 +27,6 @@ class personajesDao:
         coneccion.connection.commit()
         print('Personaje Creado con Exito!')
 
-    def buscarID(self) -> int:
+    def obtenerID(self) -> int:
         for row in coneccion.cursor.execute('select ID_PERSONAJE from PERSONAJE where ID_PERSONAJE=(select max(ID_PERSONAJE) from PERSONAJE)'):
-            return int(row[0]+1)
+            return int(row[0])+1

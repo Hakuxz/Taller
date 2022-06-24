@@ -20,7 +20,6 @@ raza_dao = razasDao()
 estados_dao = estadosDao()
 #
 
-
 def pausarYvolver():
     print('1.- Volver: ')
     while(True):
@@ -70,7 +69,8 @@ def crearPersonaje(id_jugador):
                     atributos[0] += raza_dao.buscarFuerza(id_raza)
                     atributos[1] += raza_dao.buscarDestreza(id_raza)
                     atributos[2] += raza_dao.buscarResistencia(id_raza)
-                    nuevo_personaje = personajes(personaje_dao.buscarID(), nombre_personaje, '1', 1, int(atributos[3]), int(atributos[4]), int(atributos[5]), 0, int(atributos[0]), int(atributos[1]), int(atributos[2]), int(id_jugador), 0, int(id_raza))
+                    print(personaje_dao.obtenerID())
+                    nuevo_personaje = personajes(personaje_dao.obtenerID(), nombre_personaje, 1, 1, int(atributos[3]), int(atributos[4]), int(atributos[5]), 0, int(atributos[0]), int(atributos[1]), int(atributos[2]), int(id_jugador), 0, int(id_raza))
                     personaje_dao.crear(nuevo_personaje)
                     return
     # Fin Creacion del Personaje
@@ -81,11 +81,10 @@ class menu_jugador():
         while(enFuncionamiento):
             time.sleep(2)
             os.system('cls')
-            print(id_jugador)
             print('>> Bienvenido Jugador: ' + nombre + ' >>')
             print('>> Menu >>')
             print(
-                'Seleccione que opcion desea ingresando el numero corrrespondiente a esta:')
+                'Seleccione que opcion desea ingresando el numero correspondiente a esta:')
             print('1.- Crear Personajes')
             print('2.- Ver Mis Personajes')
             print('3.- Razas')
@@ -115,7 +114,7 @@ class menu_jugador():
                 equipo_dao.mostrar()
                 pausarYvolver()
             elif seleccion == '7':
-                print('>> Hasta Luego ' + nombre)
+                print('>> Hasta Luego ' + nombre + '>>')
                 enFuncionamiento = False
             else:
                 print('Valor Ingresado no Valido: '+seleccion)

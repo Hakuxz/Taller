@@ -15,33 +15,38 @@ enFunconamiento = True
 
 def ingresoUsuario():
     os.system('cls')
-    print('<<---------------------<< Menu Ingresar Usuario >>---------------------->>')
+    print('>> Ingresar Usuario >>')
     print('Ingrese su Nombre de Usuario:')
-    nnUsuario = input('#: ').lower()
+    nnUsuario = input('#: ').upper()
     print('Ingrese su Contraseña:')
     ccUsuario = input('#: ')
     if jugador_dao.comprobarUsuario(nnUsuario,ccUsuario):
         menu = menu_jugador(enFunconamiento,nnUsuario,jugador_dao.obtenerID(nnUsuario))
     elif gamemaster_dao.comprobarUsuario(nnUsuario,ccUsuario):
         menu = menu_jugador(enFunconamiento,nnUsuario,jugador_dao.obtenerID(nnUsuario))
+    else:
+        print('Los Datos Ingresado no Coinciden')
 
 def crearUsuario(): # Paso 1
     os.system('cls')
-    print('<<-----------------------<< Menu Crear Usuario >>----------------------->>')
+    print('>> Crear Usuario >>')
     print('1.- Crear usuario GameMaster')
     print('2.- Crear usuario Jugador')
+    print('3.- Volver')
     opcion = input('#: ')
     if opcion == '1':
         creacionUsuario('gamemaster')
     elif opcion == '2':
         creacionUsuario('jugador')
+    elif opcion == '3':
+        return
     else:
         print('Valor Ingresado no Valido: '+seleccion)
 
 def creacionUsuario(tipo): # Paso 2
     os.system('cls')
     print('Seleccione un NickName:')
-    nick = input('#: ').lower()
+    nick = input('#: ').upper()
 
     #---Inicio verificacion de Nickname--->>
     if gamemaster_dao.buscarNombre(nick) or jugador_dao.buscarNombre(nick):
@@ -68,12 +73,12 @@ def creacionUsuario(tipo): # Paso 2
 while(enFunconamiento):
     time.sleep(2)
     os.system('cls')
-    print('<<-----------------------<< Menu >>----------------------->>')
+    print('>>  Menu >>')
     print('Seleccione que opcion desea ingresando el numero corrrespondiente a esta:')
     print('1.- Ingresar Usuario')
     print('2.- Crear Usuario')
     print('3.- Salir')
-    print('<<------------------------------<< Menu >>------------------------------>>')
+    print('>> Menu >>')
     seleccion = input('#: ')
     #------------------------------------------>>
     if seleccion == '1':

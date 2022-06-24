@@ -21,24 +21,18 @@ class t_jugadorDAO:
             return row[0]+1
 
     def buscarNombre(self,nombre):
-        for row in coneccion.cursor.execute('select NOMBRE_JUGADOR from JUGADOR'):
-            for i in row:
-                if i == nombre:
-                    return True
-                else:
-                    return False
+        for row in coneccion.cursor.execute('select NOMBRE_JUGADOR from JUGADOR where NOMBRE_JUGADOR=:1',[nombre]):
+            if not row:
+                return False
+            else:
+                return True
 
     def comprobarUsuario(self,nombre,cc):
         for row in coneccion.cursor.execute('select * from JUGADOR'):
             if row[1] == nombre:
                 if row[2] == cc:
                     return True
-                else:
-                    print('Usuario No Valido')
-                    return False
-            else:
-                print('Nickname Ingresado No Valido')
-                return False
+        return False
 
     def obtenerID(self,nombre):
         for row in coneccion.cursor.execute('select ID_JUGADOR from JUGADOR where NOMBRE_JUGADOR=:1',[nombre]):
