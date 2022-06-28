@@ -2,10 +2,8 @@ from Equipo.equipoDao import equipoDao
 from Estados.estadosDao import estadosDao
 from coneccion import coneccion
 from beautifultable import BeautifulTable
-from Personajes.personajes import personajes
 from Razas.razasDao import razasDao
 from t_jugadorDAO import t_jugadorDAO
-from Estados.estados import estados
 
 tabla = BeautifulTable()
 tabla.columns.header = ['ID', 'Nombre', 'Estado', 'Nivel', 'Inteligencia',
@@ -25,11 +23,12 @@ class personajesDao:
         print(tabla)
 
     # Mostrar Tabla Resumen GameMaster
-    def mostrarPersonajesGamemaster():
+    def mostrarPersonajesGamemaster(self):
         tablaGM.clear()
         for row in coneccion.cursor.execute('select NOMBRE_PERSONAJE, ESTADO_PERSONAJE, NIVEL_PERSONAJE, EXPERIENCIA, ID_JUGADOR, RAZA, EQUIPO from PERSONAJE'):
-            mostrar = [row[0],estadosDao.obtenerNombre(row[1]),row[2],row[3],t_jugadorDAO.obtenerNombre(row[4]),razasDao.obtenerNombre(row[5]),equipoDao.obtenerNombre(row[6])]
-            tablaGM.rows.append(mostrar)
+            tablaGM.rows.append(row)
+            #mostrar = [row[0],estadosDao.obtenerNombre(row[1]),row[2],row[3],t_jugadorDAO.obtenerNombre(row[4]),razasDao.obtenerNombre(row[5]),equipoDao.obtenerNombre(row[6])]
+            #tabla.rows.append(mostrar)
         print(tablaGM)
 
     # Mostrar Tabla Resumen Jugador
@@ -48,3 +47,13 @@ class personajesDao:
     def obtenerID(self) -> int:
         for row in coneccion.cursor.execute('select ID_PERSONAJE from PERSONAJE where ID_PERSONAJE=(select max(ID_PERSONAJE) from PERSONAJE)'):
             return int(row[0])+1
+
+    def obtenerLista():
+        for row in coneccion.cursor.execute('select * from PERSONAJE'):
+            print(str(row[0]) + '.- ' + row[1])
+
+    def obtenerPersonaje(self,id_personaje): #Obtener valores de un personaje mediante su ID : GM
+        tablaGM.clear()
+        for row in coneccion.cursor.execute('select NOMBRE_PERSONAJE, ESTADO_PERSONAJE, NIVEL_PERSONAJE, EXPERIENCIA, ID_JUGADOR, RAZA, EQUIPO from PERSONAJE where ID_PERSONAJE=:1',[id_personaje]):
+            tablaGM.rows.append(row)
+        print(tablaGM)

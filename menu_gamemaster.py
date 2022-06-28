@@ -1,5 +1,6 @@
 import time
 import os
+from beautifultable import BeautifulTable
 # DAO's
 from Equipo.equipoDao import equipoDao
 from Estados.estadosDao import estadosDao
@@ -32,9 +33,7 @@ def pausarYvolver():
 def menuInterno(variante):
     print('>> Menu ' + variante + ' >>')
     print('1.- Ver ')
-    print('2.- Crear ')
-    print('3.- Editar ')
-    print('4.- Borrar ')
+    print('2.- Buscar')
     opcion = input('#: ')
     return opcion
 
@@ -47,7 +46,7 @@ class menu_gamemaster():
             print('>> Bienvenido GameMaster: ' + nombre + ' >>')
             print('>> Menu >>')
             print('Seleccione que opcion desea ingresando el numero correspondiente a esta:')
-            print('1.- Mostrar Personajes')
+            print('1.- Personajes')
             print('2.- Ver Personajes')
             print('3.- Razas')
             print('4.- Poderes')
@@ -57,8 +56,23 @@ class menu_gamemaster():
             print('>> Menu >>')
             seleccion = input('#: ')
             os.system('cls')
-            if seleccion == '1':
-                personajesDao.mostrarPersonajesGamemaster()
+            if seleccion == '1': # Personajes
+                opcion = menuInterno('Personajes')
+                if opcion == '1':
+                    personaje_dao.mostrarPersonajesGamemaster()
+                elif opcion == '2':
+                    while(True):
+                        print('Seleccione el personaje que desea ver: ')
+                        personajesDao.obtenerLista()
+                        personaje = input('#: ')
+                        if not personaje:
+                            return 'Valor Ingresado no Valido: ' + personaje
+                        else:
+                            personaje_dao.obtenerPersonaje(personaje)
+                        break
+                else:
+                    print('Valor Ingresado no Valido: ' + personaje)
+                    break
                 pausarYvolver()
             elif seleccion == '2':
                 pausarYvolver()

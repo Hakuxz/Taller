@@ -63,12 +63,19 @@ def crearPersonaje(id_jugador):
                     print(
                         'Ha ingresado mas puntos de los debidos, por favor distribuyalos nuevamente')
                 else:
-                    atributos[0] += raza_dao.obtenerFuerza(id_raza)
-                    atributos[1] += raza_dao.obtenerDestreza(id_raza)
-                    atributos[2] += raza_dao.obtenerResistencia(id_raza)
-                    nuevo_personaje = personajes(int(personaje_dao.obtenerID()), nombre_personaje, 1, 1, int(atributos[3]), int(atributos[4]), int(atributos[5]), 0, int(atributos[0]), int(atributos[1]), int(atributos[2]), int(id_jugador), 0, int(id_raza))
-                    personaje_dao.crear(nuevo_personaje)
-                    return
+                    while(True):
+                        print('Seleccione su equipo inicial: ')
+                        equipoDao.obtenerLista()
+                        id_equipo = input('#: ')
+                        if not id_equipo:
+                            return 'Valor Ingresado no Valido: ' + id_equipo
+                        else: 
+                            atributos[0] += raza_dao.obtenerFuerza(id_raza)
+                            atributos[1] += raza_dao.obtenerDestreza(id_raza)
+                            atributos[2] += raza_dao.obtenerResistencia(id_raza)
+                            nuevo_personaje = personajes(int(personaje_dao.obtenerID()), nombre_personaje, 1, 1, int(atributos[3]), int(atributos[4]), int(atributos[5]), 0, int(atributos[0]), int(atributos[1]), int(atributos[2]), int(id_jugador), int(id_equipo), int(id_raza))
+                            personaje_dao.crear(nuevo_personaje)
+                            return
     # Fin Creacion del Personaje
 
 # Menu ---------------------------------------->>

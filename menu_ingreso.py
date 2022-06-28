@@ -72,7 +72,7 @@ def creacionUsuario(tipo): # Paso 2
 
 # Menu ---------------------------------------->>
 while(enFunconamiento):
-    time.sleep(2)
+    time.sleep(1)
     os.system('cls')
     print('>>  Menu >>')
     print('Seleccione que opcion desea ingresando el numero corrrespondiente a esta:')
@@ -92,4 +92,4 @@ while(enFunconamiento):
         enFunconamiento = False
     else:
         print('Valor Ingresado no Valido: '+seleccion)
-        time.sleep(2)
+        time.sleep(1)
