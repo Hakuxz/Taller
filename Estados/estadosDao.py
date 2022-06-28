@@ -12,6 +12,6 @@ class estadosDao:
             tabla.rows.append(row)
         print(tabla)
 
-    def obtenerNombre(self,id_estado): # Entrega el Nombre
+    def obtenerNombre(id_estado): # Entrega el Nombre
         for row in coneccion.cursor.execute('select NOMBRE from ESTADOS where ID_ESTADO=:1',[id_estado]):
             return row[0]

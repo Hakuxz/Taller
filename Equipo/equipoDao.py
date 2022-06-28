@@ -12,3 +12,7 @@ class equipoDao:
             mostrar = [row[1],row[2],row[3],row[4]]
             tabla.rows.append(mostrar)
         print(tabla)
+
+    def obtenerNombre(id_equipo): # Entrega el Nombre
+        for row in coneccion.cursor.execute('select NOMBRE_EQUIPO from EQUIPO where ID_EQUIPO=:1',[id_equipo]):
+            return row[0]

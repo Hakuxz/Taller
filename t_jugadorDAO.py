@@ -38,3 +38,9 @@ class t_jugadorDAO:
     def obtenerID(self,nombre):
         for row in coneccion.cursor.execute('select ID_JUGADOR from JUGADOR where NOMBRE_JUGADOR=:1',[nombre]):
             return row[0]
+    
+    def obtenerNombre(id_jugador) -> str:
+        for row in coneccion.cursor.execute('select NOMBRE_JUGADOR from JUGADOR where ID_JUGADOR =:1', [id_jugador]):
+            return row[0]
+
+    

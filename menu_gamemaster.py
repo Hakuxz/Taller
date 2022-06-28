@@ -20,6 +20,23 @@ raza_dao = razasDao()
 estados_dao = estadosDao()
 #
 
+def pausarYvolver():
+    print('1.- Volver: ')
+    while(True):
+        opcion = input('# ')
+        if opcion == '1':
+            return
+        else:
+            print('Valor Ingresado no Valido')
+
+def menuInterno(variante):
+    print('>> Menu ' + variante + ' >>')
+    print('1.- Ver ')
+    print('2.- Crear ')
+    print('3.- Editar ')
+    print('4.- Borrar ')
+    opcion = input('#: ')
+    return opcion
 
 # Menu ---------------------------------------->>
 class menu_gamemaster():
@@ -29,10 +46,9 @@ class menu_gamemaster():
             os.system('cls')
             print('>> Bienvenido GameMaster: ' + nombre + ' >>')
             print('>> Menu >>')
-            print(
-                'Seleccione que opcion desea ingresando el numero correspondiente a esta:')
-            print('1.- Crear Personajes')
-            print('2.- Ver Mis Personajes')
+            print('Seleccione que opcion desea ingresando el numero correspondiente a esta:')
+            print('1.- Mostrar Personajes')
+            print('2.- Ver Personajes')
             print('3.- Razas')
             print('4.- Poderes')
             print('5.- Habilidades')
@@ -42,17 +58,18 @@ class menu_gamemaster():
             seleccion = input('#: ')
             os.system('cls')
             if seleccion == '1':
-                pass
+                personajesDao.mostrarPersonajesGamemaster()
+                pausarYvolver()
             elif seleccion == '2':
-                pass
+                pausarYvolver()
             elif seleccion == '3':
-                pass
+                pausarYvolver()
             elif seleccion == '4':
-                pass
+                pausarYvolver()
             elif seleccion == '5':
-                pass
+                pausarYvolver()
             elif seleccion == '6':
-                pass
+                pausarYvolver()
             elif seleccion == '7':
                 print('>> Hasta Luego ' + nombre + ' >>')
                 enFuncionamiento = False
