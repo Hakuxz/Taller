@@ -16,7 +16,7 @@ class personajes:
         self.__raza = raza
 
     @property # ------------------------------------->>
-    def id(self):
+    def id(self) -> int:
         return self.__id_pj
 
     @property # ------------------------------------->>
@@ -24,49 +24,49 @@ class personajes:
         return self.__nombre
 
     @property # ------------------------------------->>
-    def estado(self) -> str:
+    def estado(self) -> int:
         return self.__estado
 
     @property # ------------------------------------->>
-    def nivel(self) -> str:
+    def nivel(self) -> int:
         return self.__nivel
 
     @property # ------------------------------------->>
-    def inteligencia(self) -> str:
+    def inteligencia(self) -> int:
         return self.__inteligencia
 
     @property # ------------------------------------->>
-    def sabiduria(self) -> str:
+    def sabiduria(self) -> int:
         return self.__sabiduria
 
     @property # ------------------------------------->>
-    def carisma(self) -> str:
+    def carisma(self) -> int:
         return self.__carisma
 
     @property # ------------------------------------->>
-    def experiencia(self) -> str:
+    def experiencia(self) -> int:
         return self.__experiencia
 
     @property # ------------------------------------->>
-    def fuerza(self) -> str:
+    def fuerza(self) -> int:
         return self.__fuerza
 
     @property # ------------------------------------->>
-    def destreza(self) -> str:
+    def destreza(self) -> int:
         return self.__destreza
 
     @property # ------------------------------------->>
-    def resistencia(self) -> str:
+    def resistencia(self) -> int:
         return self.__resistencia
 
     @property # ------------------------------------->>
-    def id_jugador(self) -> str:
+    def id_jugador(self) -> int:
         return self.__id_jugador
 
     @property # ------------------------------------->>
-    def equipo(self) -> str:
+    def equipo(self) -> int:
         return self.__equipo
 
     @property # ------------------------------------->>
-    def raza(self):
+    def raza(self) -> int:
         return self.__raza

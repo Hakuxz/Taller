@@ -3,15 +3,16 @@ from beautifultable import BeautifulTable
 from t_jugador import t_jugador
 
 tabla = BeautifulTable()
-tabla.columns.header = ['ID','Nombre','Contraseña','Personajes']
+tabla.columns.header = ['ID','Nombre','Contraseña']
 
 class t_jugadorDAO:
     def crearJugador(self, task):
-        coneccion.cursor.execute('insert into JUGADOR values(:1, :2, :3, :4)',[task.id_jugador,task.nombre,task.contrasena,task.personajes])
+        coneccion.cursor.execute('insert into JUGADOR values(:1, :2, :3)',[task.id_jugador,task.nombre,task.contrasena])
         coneccion.connection.commit()
         print('Jugador Creado con Exito!')
 
     def tablas(self): # Dibujar tabla
+        tabla.clear()
         for row in coneccion.cursor.execute('select * from JUGADOR'):
             tabla.rows.append(row)
         print(tabla)

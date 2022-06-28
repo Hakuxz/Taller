@@ -7,6 +7,7 @@ tabla.columns.header = ['ID', 'Nombre', 'Descripcion']
 
 class estadosDao:
     def mostrar(self):  # Dibujar tabla
+        tabla.clear()
         for row in coneccion.cursor.execute('select * from ESTADOS'):
             tabla.rows.append(row)
         print(tabla)

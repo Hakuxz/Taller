@@ -29,7 +29,6 @@ def pausarYvolver():
         else:
             print('Valor Ingresado no Valido')
 
-
 def crearPersonaje(id_jugador):
     os.system('cls')
     print('>> Creacion de Personaje >>')
@@ -46,9 +45,8 @@ def crearPersonaje(id_jugador):
         else:
             # Atributos del Personaje
             while(True):
-                print(
-                    'A continuacion posees 12 puntos a repartir entre los seis atributos del personaje: Fuerza, Destreza, Reistencia, Inteligencia, Sabiduria y Carisma'
-                )
+                print('A continuacion posees 12 puntos a repartir entre los seis atributos del personaje: ')
+                print('Fuerza, Destreza, Reistencia, Inteligencia, Sabiduria y Carisma')
                 fuerza = int(input('Fuerza: #: '))
                 destreza = int(input('Destreza: #: '))
                 resistencia = int(input('Resistencia: #: '))
@@ -57,8 +55,7 @@ def crearPersonaje(id_jugador):
                 carisma = int(input('Carisma: #: '))
                 atributos = [fuerza, destreza, resistencia,
                              inteligencia, sabiduria, carisma]
-                total_puntos = int(fuerza) + int(destreza) + int(resistencia) + \
-                    int(inteligencia) + int(sabiduria) + int(carisma)
+                total_puntos = int(fuerza) + int(destreza) + int(resistencia) + int(inteligencia) + int(sabiduria) + int(carisma)
                 if int(total_puntos) < 12:
                     print(
                         'No se distribuyeron correctamente los 12 puntos, por favor intentelo nuevamente')
@@ -66,11 +63,10 @@ def crearPersonaje(id_jugador):
                     print(
                         'Ha ingresado mas puntos de los debidos, por favor distribuyalos nuevamente')
                 else:
-                    atributos[0] += raza_dao.buscarFuerza(id_raza)
-                    atributos[1] += raza_dao.buscarDestreza(id_raza)
-                    atributos[2] += raza_dao.buscarResistencia(id_raza)
-                    print(personaje_dao.obtenerID())
-                    nuevo_personaje = personajes(personaje_dao.obtenerID(), nombre_personaje, 1, 1, int(atributos[3]), int(atributos[4]), int(atributos[5]), 0, int(atributos[0]), int(atributos[1]), int(atributos[2]), int(id_jugador), 0, int(id_raza))
+                    atributos[0] += raza_dao.obtenerFuerza(id_raza)
+                    atributos[1] += raza_dao.obtenerDestreza(id_raza)
+                    atributos[2] += raza_dao.obtenerResistencia(id_raza)
+                    nuevo_personaje = personajes(int(personaje_dao.obtenerID()), nombre_personaje, 1, 1, int(atributos[3]), int(atributos[4]), int(atributos[5]), 0, int(atributos[0]), int(atributos[1]), int(atributos[2]), int(id_jugador), 0, int(id_raza))
                     personaje_dao.crear(nuevo_personaje)
                     return
     # Fin Creacion del Personaje

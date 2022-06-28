@@ -13,6 +13,7 @@ class t_gamemasterDAO:
         print('GM Creado con Exito!')
 
     def tablas(self): # Dibujar tabla
+        tabla.clear()
         for row in coneccion.cursor.execute('select * from GAMEMASTER'):
             tabla.rows.append(row)
         print(tabla)

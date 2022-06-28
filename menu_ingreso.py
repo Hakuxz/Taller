@@ -67,7 +67,7 @@ def creacionUsuario(tipo): # Paso 2
         gamemaster_dao.crearGM(nuevoGM)
     elif tipo == 'jugador':
         id_jugador = jugador_dao.buscarID()
-        nuevoPersonaje = t_jugador(id_jugador,nick,cc,0)
+        nuevoPersonaje = t_jugador(id_jugador,nick,cc)
         jugador_dao.crearJugador(nuevoPersonaje) 
 
 # Menu ---------------------------------------->>

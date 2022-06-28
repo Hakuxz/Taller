@@ -3,10 +3,12 @@ from beautifultable import BeautifulTable
 from Poderes.poderes import poderes
 
 tabla = BeautifulTable()
-tabla.columns.header = ['ID', 'Nombre', 'Detalle']
+tabla.columns.header = ['Nombre', 'Detalle']
 
 class poderesDao:
     def mostrar(self):  # Dibujar tabla
+        tabla.clear()
         for row in coneccion.cursor.execute('select * from PODER'):
-            tabla.rows.append(row)
+            mostrar = [row[1],row[2]]
+            tabla.rows.append(mostrar)
         print(tabla)

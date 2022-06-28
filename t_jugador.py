@@ -1,9 +1,8 @@
 class t_jugador:
-    def __init__(self,id_jugador,nombre,contrasena,personajes):
+    def __init__(self,id_jugador,nombre,contrasena):
         self.__id_jugador = id_jugador
         self.__nombre = nombre
         self.__contrasena = contrasena
-        self.__personajes = personajes
 
     @property # ------------------------------------->>
     def id_jugador(self) -> int:
@@ -16,7 +15,3 @@ class t_jugador:
     @property # ------------------------------------->>
     def contrasena(self) -> str:
         return self.__contrasena
-
-    @property # ------------------------------------->>
-    def personajes(self) -> int:
-        return self.__personajes
