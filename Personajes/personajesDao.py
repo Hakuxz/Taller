@@ -1,3 +1,4 @@
+from multiprocessing import connection
 from Equipo.equipoDao import equipoDao
 from Estados.estadosDao import estadosDao
 from coneccion import coneccion
@@ -27,8 +28,6 @@ class personajesDao:
         tablaGM.clear()
         for row in coneccion.cursor.execute('select NOMBRE_PERSONAJE, ESTADO_PERSONAJE, NIVEL_PERSONAJE, EXPERIENCIA, ID_JUGADOR, RAZA, EQUIPO from PERSONAJE'):
             tablaGM.rows.append(row)
-            #mostrar = [row[0],estadosDao.obtenerNombre(row[1]),row[2],row[3],t_jugadorDAO.obtenerNombre(row[4]),razasDao.obtenerNombre(row[5]),equipoDao.obtenerNombre(row[6])]
-            #tabla.rows.append(mostrar)
         print(tablaGM)
 
     # Mostrar Tabla Resumen Jugador
@@ -55,5 +54,61 @@ class personajesDao:
     def obtenerPersonaje(self,id_personaje): #Obtener valores de un personaje mediante su ID : GM
         tablaGM.clear()
         for row in coneccion.cursor.execute('select NOMBRE_PERSONAJE, ESTADO_PERSONAJE, NIVEL_PERSONAJE, EXPERIENCIA, ID_JUGADOR, RAZA, EQUIPO from PERSONAJE where ID_PERSONAJE=:1',[id_personaje]):
-            tablaGM.rows.append(row)
+            mostrar = [row[0],estadosDao.obtenerNombre(row[1]),row[2],row[3],t_jugadorDAO.obtenerNombre(row[4]),razasDao.obtenerNombre(row[5]),equipoDao.obtenerNombre(row[6])]
+            tablaGM.rows.append(mostrar)
         print(tablaGM)
+
+    def obtenerExperiencia(id_personaje) -> int:
+        for row in coneccion.cursor.execute('select EXPERIENCIA from PERSONAJE where ID_PERSONAJE=:1',[id_personaje]):
+            return row[0]
+
+    def obtenerNivel(id_persoanje) -> int:
+        for row in coneccion.cursor.execute('select NIVEL_PERSONAJE from PERSONAJE where ID_PERSONAJE=:1',[id_persoanje]):
+            return row[0]
+
+    def otorgarExp(experiencia,id_personaje,nivelActual):
+        niveles = [30,55,70,100,150]
+        for i in niveles:
+            if nivelActual == 1 and experiencia >= niveles[0]:
+                expActual = experiencia - niveles[0]    
+                coneccion.cursor.execute('update PERSONAJE set NIVEL_PERSONAJE=:1 where ID_PERSONAJE=:1',[(nivelActual+1),id_personaje])        
+                coneccion.cursor.execute('update PERSONAJE set EXPERIENCIA=:1 where ID_PERSONAJE=:1',[expActual,id_personaje])
+                coneccion.connection.commit()
+                print('Experiencia otorgada con Exito!')
+                break
+            if nivelActual == 2 and experiencia >= niveles[1]:
+                expActual = experiencia - niveles[1]    
+                coneccion.cursor.execute('update PERSONAJE set NIVEL_PERSONAJE=:1 where ID_PERSONAJE=:1',[(nivelActual+1),id_personaje])        
+                coneccion.cursor.execute('update PERSONAJE set EXPERIENCIA=:1 where ID_PERSONAJE=:1',[expActual,id_personaje])
+                coneccion.connection.commit()
+                print('Experiencia otorgada con Exito!')
+                break
+            if nivelActual == 3 and experiencia >= niveles[2]:
+                expActual = experiencia - niveles[2]    
+                coneccion.cursor.execute('update PERSONAJE set NIVEL_PERSONAJE=:1 where ID_PERSONAJE=:1',[(nivelActual+1),id_personaje])        
+                coneccion.cursor.execute('update PERSONAJE set EXPERIENCIA=:1 where ID_PERSONAJE=:1',[expActual,id_personaje])
+                coneccion.connection.commit()
+                print('Experiencia otorgada con Exito!')
+                break
+            if nivelActual == 4 and experiencia >= niveles[3]:
+                expActual = experiencia - niveles[3]    
+                coneccion.cursor.execute('update PERSONAJE set NIVEL_PERSONAJE=:1 where ID_PERSONAJE=:1',[(nivelActual+1),id_personaje])        
+                coneccion.cursor.execute('update PERSONAJE set EXPERIENCIA=:1 where ID_PERSONAJE=:1',[expActual,id_personaje])
+                coneccion.connection.commit()
+                print('Experiencia otorgada con Exito!')
+                break
+            if nivelActual == 5 and experiencia >= niveles[4]:
+                expActual = experiencia - niveles[4]    
+                coneccion.cursor.execute('update PERSONAJE set NIVEL_PERSONAJE=:1 where ID_PERSONAJE=:1',[(nivelActual+1),id_personaje])        
+                coneccion.cursor.execute('update PERSONAJE set EXPERIENCIA=:1 where ID_PERSONAJE=:1',[expActual,id_personaje])
+                coneccion.connection.commit()
+                print('Experiencia otorgada con Exito!')
+                break
+        coneccion.cursor.execute('update PERSONAJE set EXPERIENCIA=:1 where ID_PERSONAJE=:1',[experiencia,id_personaje])
+        coneccion.connection.commit()
+        print('Experiencia otorgada con Exito!')
+
+    def cambiarEstado(id_personaje):
+        estadoActual = coneccion.cursor.execute('select ESTADO_PERSONAJE from PERSONAJE where ID_PERSONAJE=:1',[id_personaje])
+        print('Su personaje mantiene el estado: ' + estadoActual)
+

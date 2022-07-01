@@ -32,8 +32,9 @@ def pausarYvolver():
 
 def menuInterno(variante):
     print('>> Menu ' + variante + ' >>')
-    print('1.- Ver ')
+    print('1.- Ver Todos')
     print('2.- Buscar')
+    print('3.- Volver')
     opcion = input('#: ')
     return opcion
 
@@ -57,22 +58,44 @@ class menu_gamemaster():
             seleccion = input('#: ')
             os.system('cls')
             if seleccion == '1': # Personajes
-                opcion = menuInterno('Personajes')
-                if opcion == '1':
-                    personaje_dao.mostrarPersonajesGamemaster()
-                elif opcion == '2':
-                    while(True):
-                        print('Seleccione el personaje que desea ver: ')
-                        personajesDao.obtenerLista()
-                        personaje = input('#: ')
-                        if not personaje:
-                            return 'Valor Ingresado no Valido: ' + personaje
-                        else:
-                            personaje_dao.obtenerPersonaje(personaje)
+                while(True):
+                    opcion = menuInterno('Personajes')
+                    if opcion == '1':
+                        personaje_dao.mostrarPersonajesGamemaster()
+                    elif opcion == '2':
+                        volver = True
+                        while(volver):
+                            print('Seleccione el personaje que desea ver: ')
+                            personajesDao.obtenerLista()
+                            personaje = int(input('#: '))
+                            if not personaje:
+                                return 'Valor Ingresado no Valido: ' + personaje
+                            else:
+                                personaje_dao.obtenerPersonaje(personaje)
+                                while(True):
+                                    print('Que desea hacer con el personaje seleccionado:')
+                                    print('1.- Otorgar experiencia')
+                                    print('2.- Cambiar su estado')
+                                    print('3.- Borrar')
+                                    print('4.- Volver')
+                                    opcion = input('#: ')
+                                    if opcion == '1':
+                                        print('Introdusca la experiencia optenida: ')
+                                        exp = int(input('#: '))
+                                        personajesDao.otorgarExp((personajesDao.obtenerExperiencia(personaje) + exp), personaje, personajesDao.obtenerNivel(personaje))
+                                    elif opcion == '2':
+                                        pass
+                                    elif opcion == '3':
+                                        pass
+                                    elif opcion == '4':
+                                        volver = False
+                                        break
+                                    else:
+                                        print('Valor Ingresado no Valido: ' + opcion)
+                    elif opcion == '3':
                         break
-                else:
-                    print('Valor Ingresado no Valido: ' + personaje)
-                    break
+                    else:
+                        print('Valor Ingresado no Valido: ' + opcion)
                 pausarYvolver()
             elif seleccion == '2':
                 pausarYvolver()
