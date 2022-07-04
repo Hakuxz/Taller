@@ -84,9 +84,9 @@ class menu_gamemaster():
                                         exp = int(input('#: '))
                                         personajesDao.otorgarExp((personajesDao.obtenerExperiencia(personaje) + exp), personaje, personajesDao.obtenerNivel(personaje))
                                     elif opcion == '2':
-                                        pass
+                                        personajesDao.cambiarEstado(personaje)
                                     elif opcion == '3':
-                                        pass
+                                        personajesDao.borrar(personaje)
                                     elif opcion == '4':
                                         volver = False
                                         break

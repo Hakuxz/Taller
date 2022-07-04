@@ -90,33 +90,52 @@ class menu_jugador():
                 'Seleccione que opcion desea ingresando el numero correspondiente a esta:')
             print('1.- Crear Personajes')
             print('2.- Ver Mis Personajes')
-            print('3.- Razas')
-            print('4.- Poderes')
-            print('5.- Habilidades')
-            print('6.- Equipos')
-            print('7.- Salir')
+            print('3.- Ver Razas')
+            print('4.- Ver Poderes')
+            print('5.- Ver Habilidades')
+            print('6.- Ver Equipos')
+            print('8.- Salir')
             print('>> Menu >>')
             seleccion = input('#: ')
             os.system('cls')
-            if seleccion == '1':
+            if seleccion == '1': # Crear Personajes
                 crearPersonaje(id_jugador)
                 pausarYvolver()
-            elif seleccion == '2':
+            elif seleccion == '2': # Ver Mis Persoanjes
                 personaje_dao.mostrarPersonajesJugador(id_jugador)
+                while(True):
+                    print('Desea cambiar el Equipamiento de un Personaje: ')
+                    print('1.- Si')
+                    print('2.- No')
+                    opcion = input('#: ')
+                    if opcion == '1':
+                        print('Seleccione que personaje desea editar: ')
+                        personajesDao.obtenerListaPersonaje(id_jugador)
+                        opcion = input('#: ')
+                        if not opcion:
+                            print('Valor Ingresado no Valido: ' + opcion)
+                            break
+                        else:
+                            personajesDao.modificarEquipo(opcion,personajesDao.obtenerEstado(id_jugador))
+                            break
+                    elif opcion == '2':
+                        break
+                    else:
+                        print('Valor Ingresado no Valido: ' + opcion)
                 pausarYvolver()
-            elif seleccion == '3':
+            elif seleccion == '3': # Ver Razas
                 raza_dao.mostrar()
                 pausarYvolver()
-            elif seleccion == '4':
+            elif seleccion == '4': # Ver Poderes
                 poder_dao.mostrar()
                 pausarYvolver()
-            elif seleccion == '5':
+            elif seleccion == '5': # Ver Habilidades
                 habilidad_dao.mostrar()
                 pausarYvolver()
-            elif seleccion == '6':
+            elif seleccion == '6': # Ver Equipos
                 equipo_dao.mostrar()
                 pausarYvolver()
-            elif seleccion == '7':
+            elif seleccion == '7': # Salir
                 print('>> Hasta Luego ' + nombre + ' >>')
                 enFuncionamiento = False
             else:

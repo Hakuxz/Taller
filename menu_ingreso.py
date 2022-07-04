@@ -68,7 +68,7 @@ def creacionUsuario(tipo): # Paso 2
     elif tipo == 'jugador':
         id_jugador = jugador_dao.buscarID()
         nuevoPersonaje = t_jugador(id_jugador,nick,cc)
-        jugador_dao.crearJugador(nuevoPersonaje) 
+        jugador_dao.crearJugador(nuevoPersonaje)
 
 # Menu ---------------------------------------->>
 while(enFunconamiento):

@@ -20,3 +20,5 @@ class equipoDao:
     def obtenerLista():
         for row in coneccion.cursor.execute('select * from EQUIPO'):
             print(str(row[0]) + '.- ' + row[1])
+
+

@@ -33,7 +33,7 @@ class personajesDao:
     # Mostrar Tabla Resumen Jugador
     def mostrarPersonajesJugador(self, id_jugador):
         tablaJG.clear()
-        for row in coneccion.cursor.execute('select NOMBRE_PERSONAJE, NIVEL_PERSONAJE, INTELIGENCIA_PERSONAJE, SABIDURIA_PERSONAJE,CARISMA_PERSONAJE,FUERZA,DESTREZA,RESISTENCIA,EQUIPO,RAZA from PERSONAJE where ID_JUGADOR=:1', [id_jugador]):
+        for row in coneccion.cursor.execute('select NOMBRE_PERSONAJE, NIVEL_PERSONAJE, INTELIGENCIA_PERSONAJE, SABIDURIA_PERSONAJE,CARISMA_PERSONAJE,FUERZA,DESTREZA,RESISTENCIA,RAZA,EQUIPO from PERSONAJE where ID_JUGADOR=:1', [id_jugador]):
             tablaJG.rows.append(row)
         print(tablaJG)
 
@@ -47,8 +47,16 @@ class personajesDao:
         for row in coneccion.cursor.execute('select ID_PERSONAJE from PERSONAJE where ID_PERSONAJE=(select max(ID_PERSONAJE) from PERSONAJE)'):
             return int(row[0])+1
 
+    def obtenerEstado(id_personaje):
+        for row in coneccion.cursor.execute('select ESTADO_PERSONAJE from PERSONAJE where ID_PERSONAJE=:1',[id_personaje]):
+            return int(row[0])
+
     def obtenerLista():
         for row in coneccion.cursor.execute('select * from PERSONAJE'):
+            print(str(row[0]) + '.- ' + row[1])
+
+    def obtenerListaPersonaje(id_jugador):
+        for row in coneccion.cursor.execute('select * from PERSONAJE where ID_JUGADOR=:1',[id_jugador]):
             print(str(row[0]) + '.- ' + row[1])
 
     def obtenerPersonaje(self,id_personaje): #Obtener valores de un personaje mediante su ID : GM
@@ -109,6 +117,48 @@ class personajesDao:
         print('Experiencia otorgada con Exito!')
 
     def cambiarEstado(id_personaje):
-        estadoActual = coneccion.cursor.execute('select ESTADO_PERSONAJE from PERSONAJE where ID_PERSONAJE=:1',[id_personaje])
-        print('Su personaje mantiene el estado: ' + estadoActual)
+        print('Seleccione el estado que desea otorgar al personaje: ')
+        estadosDao.obtenerLista()
+        opcion = input('#: ')
+        if not opcion:
+            print('Valor Ingresado no Valido: ' + opcion)
+        else:
+            try:
+                coneccion.cursor.execute('update PERSONAJE set ESTADO_PERSONAJE=:1 where ID_PERSONAJE=:1',[opcion,id_personaje])
+                coneccion.connection.commit()
+                print('Estado Cambiado Correctamente!')
+            except:
+                print('Valor Ingresado no Valido: ' + opcion)
+
+    def borrar(id_personaje):
+        print('Esta seguro que desea borrar el personaje: ')
+        print('1.- Si, estoy seguro')
+        print('2.- No, prefiero conservarlo')
+        opcion = input('#: ')
+        if opcion == '1':
+            coneccion.cursor.execute('delete PERSONAJE where ID_PERSONAJE=:1',[id_personaje])
+            coneccion.connection.commit()
+            print('Personaje Borrado!')
+        elif opcion == '2':
+            return
+        else:
+            print('Valor Ingresado no Valido: ' + opcion)
+
+    def modificarEquipo(id_personaje,estado):
+        if estado == 0:
+            print('No puede modificar un personaje que posea el Estado: Muerto')
+        elif estado == 1:
+            print('Seleccione que arma desea para su personaje: ')
+            equipoDao.obtenerLista()
+            opcion = input('#: ')
+            if not opcion:
+                print('Valor Ingresado no Valido: ' + opcion)
+                return
+            else:
+                coneccion.cursor.execute('update PERSONAJE set EQUIPO=:1 where ID_PERSONAJE=:2',[opcion,id_personaje])
+                coneccion.connection.commit()
+                print('Equipo Modificado!')
+        else:
+            print('Valor Ingresado no Valido: ' + str(estado))
+        
 
