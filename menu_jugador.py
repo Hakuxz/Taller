@@ -94,7 +94,7 @@ class menu_jugador():
             print('4.- Ver Poderes')
             print('5.- Ver Habilidades')
             print('6.- Ver Equipos')
-            print('8.- Salir')
+            print('7.- Salir')
             print('>> Menu >>')
             seleccion = input('#: ')
             os.system('cls')
@@ -102,7 +102,8 @@ class menu_jugador():
                 crearPersonaje(id_jugador)
                 pausarYvolver()
             elif seleccion == '2': # Ver Mis Persoanjes
-                personaje_dao.mostrarPersonajesJugador(id_jugador)
+                personajesDao.mostrarPersonajesJugador(id_jugador)
+                personajesDao.obtenerPersonajeJugadorDetalle(id_jugador)
                 while(True):
                     print('Desea cambiar el Equipamiento de un Personaje: ')
                     print('1.- Si')

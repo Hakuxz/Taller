@@ -23,19 +23,31 @@ class personajesDao:
             tabla.rows.append(row)
         print(tabla)
 
-    # Mostrar Tabla Resumen GameMaster
-    def mostrarPersonajesGamemaster(self):
+    def mostrarPersonajesGamemaster(self):  # Mostrar Tabla Resumen GameMaster
         tablaGM.clear()
         for row in coneccion.cursor.execute('select NOMBRE_PERSONAJE, ESTADO_PERSONAJE, NIVEL_PERSONAJE, EXPERIENCIA, ID_JUGADOR, RAZA, EQUIPO from PERSONAJE'):
             tablaGM.rows.append(row)
         print(tablaGM)
 
-    # Mostrar Tabla Resumen Jugador
-    def mostrarPersonajesJugador(self, id_jugador):
+    def mostrarPersonajesJugador(id_jugador): # Mostrar Tabla Resumen Jugador
         tablaJG.clear()
         for row in coneccion.cursor.execute('select NOMBRE_PERSONAJE, NIVEL_PERSONAJE, INTELIGENCIA_PERSONAJE, SABIDURIA_PERSONAJE,CARISMA_PERSONAJE,FUERZA,DESTREZA,RESISTENCIA,RAZA,EQUIPO from PERSONAJE where ID_JUGADOR=:1', [id_jugador]):
             tablaJG.rows.append(row)
         print(tablaJG)
+
+    def obtenerPersonajeJugadorDetalle(id_jugador): #Obtener valores de un personaje mediante su ID : JG
+        tablaJG.clear()
+        for row in coneccion.cursor.execute('select NOMBRE_PERSONAJE, NIVEL_PERSONAJE, INTELIGENCIA_PERSONAJE, SABIDURIA_PERSONAJE,CARISMA_PERSONAJE,FUERZA,DESTREZA,RESISTENCIA,RAZA,EQUIPO from PERSONAJE INNER JOIN RAZA where ID_JUGADOR=:1',[id_jugador]):
+            mostrar = [row[1],row[3],row[4],row[5],row[6],row[8],row[9],row[10],razasDao.obtenerNombre(row[13]),equipoDao.obtenerNombre(row[12])]
+            tablaJG.rows.append(mostrar)
+        print(tablaJG)
+
+    def obtenerPersonaje(id_personaje): #Obtener valores de un personaje mediante su ID : GM
+        tablaGM.clear()
+        for row in coneccion.cursor.execute('select NOMBRE_PERSONAJE, ESTADO_PERSONAJE, NIVEL_PERSONAJE, EXPERIENCIA, ID_JUGADOR, RAZA, EQUIPO from PERSONAJE where ID_PERSONAJE=:1',[id_personaje]):
+            mostrar = [row[0],estadosDao.obtenerNombre(row[1]),row[2],row[3],t_jugadorDAO.obtenerNombre(row[4]),razasDao.obtenerNombre(row[5]),equipoDao.obtenerNombre(row[6])]
+            tablaGM.rows.append(mostrar)
+        print(tablaGM)
 
     def crear(self, task):  # Crear Personaje
         coneccion.cursor.execute('insert into PERSONAJE values(:1, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11, :12, :13, :14)', [
@@ -58,13 +70,6 @@ class personajesDao:
     def obtenerListaPersonaje(id_jugador):
         for row in coneccion.cursor.execute('select * from PERSONAJE where ID_JUGADOR=:1',[id_jugador]):
             print(str(row[0]) + '.- ' + row[1])
-
-    def obtenerPersonaje(self,id_personaje): #Obtener valores de un personaje mediante su ID : GM
-        tablaGM.clear()
-        for row in coneccion.cursor.execute('select NOMBRE_PERSONAJE, ESTADO_PERSONAJE, NIVEL_PERSONAJE, EXPERIENCIA, ID_JUGADOR, RAZA, EQUIPO from PERSONAJE where ID_PERSONAJE=:1',[id_personaje]):
-            mostrar = [row[0],estadosDao.obtenerNombre(row[1]),row[2],row[3],t_jugadorDAO.obtenerNombre(row[4]),razasDao.obtenerNombre(row[5]),equipoDao.obtenerNombre(row[6])]
-            tablaGM.rows.append(mostrar)
-        print(tablaGM)
 
     def obtenerExperiencia(id_personaje) -> int:
         for row in coneccion.cursor.execute('select EXPERIENCIA from PERSONAJE where ID_PERSONAJE=:1',[id_personaje]):
