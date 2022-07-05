@@ -71,7 +71,7 @@ class menu_gamemaster():
                             if not personaje:
                                 return 'Valor Ingresado no Valido: ' + personaje
                             else:
-                                personaje_dao.obtenerPersonaje(personaje)
+                                personajesDao.obtenerPersonaje(personaje)
                                 while(True):
                                     print('Que desea hacer con el personaje seleccionado:')
                                     print('1.- Otorgar experiencia')
