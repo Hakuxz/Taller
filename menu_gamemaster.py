@@ -61,37 +61,38 @@ class menu_gamemaster():
                 while(True):
                     opcion = menuInterno('Personajes')
                     if opcion == '1':
-                        personaje_dao.mostrarPersonajesGamemaster()
+                        personajesDao.mostrarPersonajesGamemaster()
                     elif opcion == '2':
                         volver = True
                         while(volver):
-                            print('Seleccione el personaje que desea ver: ')
-                            personajesDao.obtenerLista()
-                            personaje = int(input('#: '))
-                            if not personaje:
-                                return 'Valor Ingresado no Valido: ' + personaje
-                            else:
-                                personajesDao.obtenerPersonaje(personaje)
-                                while(True):
-                                    print('Que desea hacer con el personaje seleccionado:')
-                                    print('1.- Otorgar experiencia')
-                                    print('2.- Cambiar su estado')
-                                    print('3.- Borrar')
-                                    print('4.- Volver')
-                                    opcion = input('#: ')
-                                    if opcion == '1':
-                                        print('Introdusca la experiencia optenida: ')
-                                        exp = int(input('#: '))
-                                        personajesDao.otorgarExp((personajesDao.obtenerExperiencia(personaje) + exp), personaje, personajesDao.obtenerNivel(personaje))
-                                    elif opcion == '2':
-                                        personajesDao.cambiarEstado(personaje)
-                                    elif opcion == '3':
-                                        personajesDao.borrar(personaje)
-                                    elif opcion == '4':
-                                        volver = False
-                                        break
-                                    else:
-                                        print('Valor Ingresado no Valido: ' + opcion)
+                            try:
+                                print('Seleccione el personaje que desea ver: ')
+                                personajesDao.obtenerLista()
+                                personaje = int(input('#: '))
+                                personajesDao.obtenerPersonajePorID(personaje)
+                            except:
+                                print('Valor Ingresado no Valido: ' + personaje)
+                                return
+                            while(True):
+                                print('Que desea hacer con el personaje seleccionado:')
+                                print('1.- Otorgar experiencia')
+                                print('2.- Cambiar su estado')
+                                print('3.- Borrar')
+                                print('4.- Volver')
+                                opcion = input('#: ')
+                                if opcion == '1':
+                                    print('Introdusca la experiencia optenida: ')
+                                    exp = int(input('#: '))
+                                    personajesDao.otorgarExp((personajesDao.obtenerExperiencia(personaje) + exp), personaje, personajesDao.obtenerNivel(personaje))
+                                elif opcion == '2':
+                                    personajesDao.cambiarEstado(personaje)
+                                elif opcion == '3':
+                                    personajesDao.borrar(personaje)
+                                elif opcion == '4':
+                                    volver = False
+                                    break
+                                else:
+                                    print('Valor Ingresado no Valido: ' + opcion)
                     elif opcion == '3':
                         break
                     else:

@@ -102,8 +102,7 @@ class menu_jugador():
                 crearPersonaje(id_jugador)
                 pausarYvolver()
             elif seleccion == '2': # Ver Mis Persoanjes
-                personajesDao.mostrarPersonajesJugador(id_jugador)
-                personajesDao.obtenerPersonajeJugadorDetalle(id_jugador)
+                personajesDao.obtenerPersonajeJugador(id_jugador)
                 while(True):
                     print('Desea cambiar el Equipamiento de un Personaje: ')
                     print('1.- Si')
