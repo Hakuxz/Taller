@@ -31,23 +31,23 @@ class personajesDao:
 
     def obtenerPersonajeJugador(id_jugador): #Obtener valores de un personaje mediante su ID : JG
         tablaJG.clear()
-        for row in coneccion.cursor.execute('select P.NOMBRE_PERSONAJE, P.NIVEL_PERSONAJE, P.INTELIGENCIA_PERSONAJE, P.SABIDURIA_PERSONAJE, P.CARISMA_PERSONAJE, P.FUERZA, P.DESTREZA, P.RESISTENCIA, R.NOMBRE_RAZA, E.NOMBRE_EQUIPO from PERSONAJE P inner join RAZA R on P.RAZA=R.ID_RAZA inner join EQUIPO E on P.EQUIPO=E.ID_EQUIPO where ID_JUGADOR=:1',[id_jugador]):
+        for row in coneccion.cursor.execute('select P.NOMBRE_PERSONAJE, P.NIVEL_PERSONAJE, P.INTELIGENCIA_PERSONAJE, P.SABIDURIA_PERSONAJE, P.CARISMA_PERSONAJE, P.FUERZA, P.DESTREZA, P.RESISTENCIA, R.NOMBRE_RAZA, E.NOMBRE_EQUIPO from PERSONAJE P inner join RAZA R on P.RAZA=R.ID_RAZA inner join EQUIPO E on P.EQUIPO=E.ID_EQUIPO where ID_JUGADOR=:1 order by ID_PERSONAJE',[id_jugador]):
             tablaJG.rows.append(row)
         print(tablaJG)
 
     def obtenerPersonajePorID(id_personaje): #Obtener valores de un personaje mediante su ID : GM
         tablaGM.clear()
-        for row in coneccion.cursor.execute('select P.NOMBRE_PERSONAJE, S.NOMBRE, P.NIVEL_PERSONAJE, P.EXPERIENCIA, P.ID_JUGADOR, R.NOMBRE_RAZA, E.NOMBRE_EQUIPO from PERSONAJE P inner join RAZA R on P.RAZA=R.ID_RAZA inner join EQUIPO E on P.EQUIPO=E.ID_EQUIPO inner join ESTADOS S on ESTADO_PERSONAJE=ID_ESTADO where ID_PERSONAJE=:1',[id_personaje]):
+        for row in coneccion.cursor.execute('select P.NOMBRE_PERSONAJE, S.NOMBRE, P.NIVEL_PERSONAJE, P.EXPERIENCIA, P.ID_JUGADOR, R.NOMBRE_RAZA, E.NOMBRE_EQUIPO from PERSONAJE P inner join RAZA R on P.RAZA=R.ID_RAZA inner join EQUIPO E on P.EQUIPO=E.ID_EQUIPO inner join ESTADOS S on ESTADO_PERSONAJE=ID_ESTADO where ID_PERSONAJE=:1 order by ID_PERSONAJE',[id_personaje]):
             tablaGM.rows.append(row)
         print(tablaGM)
 
-    def crear(self, task):  # Crear Personaje
+    def crear(task):  # Crear Personaje
         coneccion.cursor.execute('insert into PERSONAJE values(:1, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11, :12, :13, :14)', [
                                  task.id, task.nombre, task.estado, task.nivel, task.inteligencia, task.sabiduria, task.carisma, task.experiencia, task.fuerza, task.destreza, task.resistencia, task.id_jugador, task.equipo, task.raza])
         coneccion.connection.commit()
         print('Personaje Creado con Exito!')
 
-    def obtenerID(self) -> int:
+    def obtenerID() -> int:
         for row in coneccion.cursor.execute('select ID_PERSONAJE from PERSONAJE where ID_PERSONAJE=(select max(ID_PERSONAJE) from PERSONAJE)'):
             return int(row[0])+1
 

@@ -1,13 +1,11 @@
 class razas:
-    def __init__(self,id_raza,nombre,fuerza,destreza,resistencia,detalle,habilidad,poder):
+    def __init__(self,id_raza,nombre,fuerza,destreza,resistencia,detalle):
         self.__id_raza = id_raza
         self.__nombre = nombre
         self.__fuerza = fuerza
         self.__destreza = destreza
         self.__resistencia = resistencia
         self.__detalle = detalle
-        self.__habilidad = habilidad
-        self.__poder = poder
 
     @property # ------------------------------------->>
     def id(self) -> str:
@@ -32,11 +30,3 @@ class razas:
     @property # ------------------------------------->>
     def detalle(self) -> str:
         return self.__detalle
-
-    @property # ------------------------------------->>
-    def habilidad(self) -> str:
-        return self.__habilidad
-
-    @property # ------------------------------------->>
-    def poder(self) -> str:
-        return self.__poder

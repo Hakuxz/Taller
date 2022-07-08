@@ -11,15 +11,6 @@ from Estados.estados import estados
 #
 from Personajes.personajes import personajes
 
-# imports Dao's
-equipo_dao = equipoDao()
-habilidad_dao = habilidadesDao()
-personaje_dao = personajesDao()
-poder_dao = poderesDao()
-raza_dao = razasDao()
-estados_dao = estadosDao()
-#
-
 def pausarYvolver():
     print('1.- Volver: ')
     while(True):
@@ -37,9 +28,9 @@ def crearPersonaje(id_jugador):
     # Raza del Personaje
     while(True):
         print('Seleccione la Raza de su Personaje: ')
-        raza_dao.obtenerLista()
+        razasDao.obtenerLista()
         id_raza = input('#: ')
-        tipo_raza = raza_dao.buscarID(id_raza)
+        tipo_raza = razasDao.buscarID(id_raza)
         if not tipo_raza:
             print('Valor Ingresado no Valido: ' + id_raza)
         else:
@@ -70,11 +61,11 @@ def crearPersonaje(id_jugador):
                         if not id_equipo:
                             return 'Valor Ingresado no Valido: ' + id_equipo
                         else: 
-                            atributos[0] += raza_dao.obtenerFuerza(id_raza)
-                            atributos[1] += raza_dao.obtenerDestreza(id_raza)
-                            atributos[2] += raza_dao.obtenerResistencia(id_raza)
-                            nuevo_personaje = personajes(int(personaje_dao.obtenerID()), nombre_personaje, 1, 1, int(atributos[3]), int(atributos[4]), int(atributos[5]), 0, int(atributos[0]), int(atributos[1]), int(atributos[2]), int(id_jugador), int(id_equipo), int(id_raza))
-                            personaje_dao.crear(nuevo_personaje)
+                            atributos[0] += razasDao.obtenerFuerza(id_raza)
+                            atributos[1] += razasDao.obtenerDestreza(id_raza)
+                            atributos[2] += razasDao.obtenerResistencia(id_raza)
+                            nuevo_personaje = personajes(int(personajesDao.obtenerID()), nombre_personaje, 1, 1, int(atributos[3]), int(atributos[4]), int(atributos[5]), 0, int(atributos[0]), int(atributos[1]), int(atributos[2]), int(id_jugador), int(id_equipo), int(id_raza))
+                            personajesDao.crear(nuevo_personaje)
                             return
     # Fin Creacion del Personaje
 
@@ -85,7 +76,6 @@ class menu_jugador():
             time.sleep(2)
             os.system('cls')
             print('>> Bienvenido Jugador: ' + nombre + ' >>')
-            print('>> Menu >>')
             print(
                 'Seleccione que opcion desea ingresando el numero correspondiente a esta:')
             print('1.- Crear Personajes')
@@ -124,16 +114,16 @@ class menu_jugador():
                         print('Valor Ingresado no Valido: ' + opcion)
                 pausarYvolver()
             elif seleccion == '3': # Ver Razas
-                raza_dao.mostrar()
+                razasDao.mostrar()
                 pausarYvolver()
             elif seleccion == '4': # Ver Poderes
-                poder_dao.mostrar()
+                poderesDao.mostrar()
                 pausarYvolver()
             elif seleccion == '5': # Ver Habilidades
-                habilidad_dao.mostrar()
+                habilidadesDao.mostrar()
                 pausarYvolver()
             elif seleccion == '6': # Ver Equipos
-                equipo_dao.mostrar()
+                equipoDao.mostrar()
                 pausarYvolver()
             elif seleccion == '7': # Salir
                 print('>> Hasta Luego ' + nombre + ' >>')

@@ -21,4 +21,8 @@ class equipoDao:
         for row in coneccion.cursor.execute('select * from EQUIPO'):
             print(str(row[0]) + '.- ' + row[1])
 
+    def cambiarNombre(nuevoEquipo):
+        coneccion.cursor.execute('update EQUIPO set ID_EQUIPO=:1',[nuevoEquipo])
+        print('Equipo Modificado Correctamente!')
+
 
