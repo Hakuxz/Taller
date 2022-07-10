@@ -6,7 +6,7 @@ tabla = BeautifulTable()
 tabla.columns.header = ['Nombre', 'Detalle']
 
 class poderesDao:
-    def mostrar(self):  # Dibujar tabla
+    def mostrar():  # Dibujar tabla
         tabla.clear()
         for row in coneccion.cursor.execute('select * from PODER'):
             mostrar = [row[1],row[2]]

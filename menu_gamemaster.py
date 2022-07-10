@@ -122,16 +122,38 @@ class menu_gamemaster():
                         print('Su raza ' + nombre_raza + 'a sido Creada con Exito!')
                     elif opcion == '3': # >> Buscar
                         print('Seleccione la raza que desea ver: ')
-                        razasDao.obtenerLista()
-                        raza = input('#: ')
-                        razasDao.mostrarPorID(raza)
+                        razasDao.mostrarLista()
+                        ver_raza = input('#: ')
+                        razasDao.mostrarPorID(ver_raza)
                     elif opcion == '4': # >> Editar
-                        pass
+                        print('Seleccione la raza que desea editar, las razas basicas no pueden ser editadas: ')
+                        razasDao.mostrarListaEdicion()
+                        editar_raza = input('#: ')
+                        razasDao.mostrarPorID(editar_raza)
+                        print('Que desea modificar de la raza: '+ razasDao.obtenerNombre(editar_raza))
+                        print('1.- Nombre')
+                        print('2.- Fuerza')
+                        print('3.- Destreza')
+                        print('4.- Resistencia')
+                        print('5.- Detalle')
+                        modificar_raza = input('#: ')
+                        if modificar_raza == '1':
+                            pass
+                        elif modificar_raza == '2':
+                            pass
+                        elif modificar_raza == '3':
+                            pass
+                        elif modificar_raza == '4':
+                            pass
+                        elif modificar_raza == '5':
+                            pass
+                        else:
+                            print('Valor Ingresado no Valido: ' + modificar_raza)
                     elif opcion == '5': # >> Borrar
                         print('Seleccione que raza desea Borrar: ')
                         razasDao.mostrarLista()
-                        borrar = input('#: ')
-                        razasDao.borrar(borrar)
+                        borrar_raza = input('#: ')
+                        razasDao.borrar(borrar_raza)
                     elif opcion == '6': # >> Salir
                         break
                     else:

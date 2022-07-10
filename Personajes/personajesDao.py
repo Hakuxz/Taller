@@ -56,11 +56,11 @@ class personajesDao:
             return int(row[0])
 
     def obtenerLista():
-        for row in coneccion.cursor.execute('select * from PERSONAJE'):
+        for row in coneccion.cursor.execute('select * from PERSONAJE order by ID_PERSONAJE'):
             print(str(row[0]) + '.- ' + row[1])
 
     def obtenerListaPersonaje(id_jugador):
-        for row in coneccion.cursor.execute('select * from PERSONAJE where ID_JUGADOR=:1',[id_jugador]):
+        for row in coneccion.cursor.execute('select * from PERSONAJE where ID_JUGADOR=:1 order by ID_PERSONAJE',[id_jugador]):
             print(str(row[0]) + '.- ' + row[1])
 
     def obtenerExperiencia(id_personaje) -> int:
@@ -117,15 +117,12 @@ class personajesDao:
         print('Seleccione el estado que desea otorgar al personaje: ')
         estadosDao.obtenerLista()
         opcion = input('#: ')
-        if not opcion:
+        try:
+            coneccion.cursor.execute('update PERSONAJE set ESTADO_PERSONAJE=:1 where ID_PERSONAJE=:2',[opcion,id_personaje])
+            coneccion.connection.commit()
+            print('Estado Cambiado Correctamente!')
+        except:
             print('Valor Ingresado no Valido: ' + opcion)
-        else:
-            try:
-                coneccion.cursor.execute('update PERSONAJE set ESTADO_PERSONAJE=:1 where ID_PERSONAJE=:1',[opcion,id_personaje])
-                coneccion.connection.commit()
-                print('Estado Cambiado Correctamente!')
-            except:
-                print('Valor Ingresado no Valido: ' + opcion)
 
     def borrar(id_personaje):
         print('Esta seguro que desea borrar el personaje: ')
@@ -148,13 +145,10 @@ class personajesDao:
             print('Seleccione que arma desea para su personaje: ')
             equipoDao.obtenerLista()
             opcion = input('#: ')
-            if not opcion:
-                print('Valor Ingresado no Valido: ' + opcion)
-                return
-            else:
-                coneccion.cursor.execute('update PERSONAJE set EQUIPO=:1 where ID_PERSONAJE=:2',[opcion,id_personaje])
-                coneccion.connection.commit()
-                print('Equipo Modificado!')
+            #
+            coneccion.cursor.execute('update PERSONAJE set EQUIPO=:1 where ID_PERSONAJE=:2',[opcion,id_personaje])
+            coneccion.connection.commit()
+            print('Equipo Modificado!')
         else:
             print('Valor Ingresado no Valido: ' + str(estado))
         

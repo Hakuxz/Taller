@@ -19,41 +19,21 @@ class razasDao:
                                 task.id, task.nombre, task.fuerza, task.destreza, task.resistencia, task.detalle])
         coneccion.connection.commit()
 
-    def mostrarPorID(id_raza): # Buscar en base a la ID
+    def mostrarPorID(id_raza): # Buscar en base a la ID de la raza
+        tabla.clear()
         for row in coneccion.cursor.execute('select NOMBRE_RAZA, FUERZA_RAZA, DESTREZA_RAZA, RESISTENCIA_RAZA, DETALLE_RAZA from RAZA where ID_RAZA=:1', [id_raza]):
             tabla.rows.append(row)
         print(tabla)
-
-    def obtenerID():
-        for row in coneccion.cursor.execute('select ID_RAZA from RAZA where ID_RAZA=(select max(ID_RAZA) from RAZA) order by ID_RAZA'):
-            return int(row[0])+1
     
-    def mostrarLista():
-        for row in coneccion.cursor.execute('select * from RAZA'):
+    def mostrarLista(): # Mostrar lista ID y Nombre
+        for row in coneccion.cursor.execute('select * from RAZA order by ID_RAZA'):
             print(str(row[0]) + '.- ' + row[1])
 
-    # Obtener valores:
-    def obtenerFuerza(id_raza):
-        for row in coneccion.cursor.execute('select FUERZA_RAZA from RAZA where ID_RAZA=:1', [id_raza]):
-            return int(row[0])
-    
-    def obtenerDestreza(id_raza):
-        for row in coneccion.cursor.execute('select DESTREZA_RAZA from RAZA where ID_RAZA=:1', [id_raza]):
-            return int(row[0])
-            
-    def obtenerResistencia(id_raza):
-        for row in coneccion.cursor.execute('select RESISTENCIA_RAZA from RAZA where ID_RAZA=:1', [id_raza]):
-            return int(row[0])
-
-    def obtenerLista():
-        for row in coneccion.cursor.execute('select * from RAZA'):
+    def mostrarListaEdicion(): # Mostrar Lista ID y Nombre de las razas editables
+        for row in coneccion.cursor.execute('select * from RAZA where ID_RAZA > 3 order by ID_RAZA'):
             print(str(row[0]) + '.- ' + row[1])
 
-    def obtenerNombre(id_raza) -> str:
-        for row in coneccion.cursor.execute('select NOMBRE_RAZA from RAZA where ID_RAZA =:1', [id_raza]):
-            return row[0]
-    
-    def borrar(id_raza):
+    def borrar(id_raza): # Borrar ID
         print('Esta seguro que desea borrar la raza: ')
         print('1.- Si, estoy seguro')
         print('2.- No, prefiero conservarla')
@@ -67,6 +47,28 @@ class razasDao:
         else:
             print('Valor Ingresado no Valido: ' + opcion)
         
+
+    # Obtener valores:
+    def obtenerID():# Obtener la ultima ID y sumar 1
+        for row in coneccion.cursor.execute('select ID_RAZA from RAZA where ID_RAZA=(select max(ID_RAZA) from RAZA)'):
+            return int(row[0])+1
+
+    def obtenerFuerza(id_raza):
+        for row in coneccion.cursor.execute('select FUERZA_RAZA from RAZA where ID_RAZA=:1', [id_raza]):
+            return int(row[0])
+    
+    def obtenerDestreza(id_raza):
+        for row in coneccion.cursor.execute('select DESTREZA_RAZA from RAZA where ID_RAZA=:1', [id_raza]):
+            return int(row[0])
+            
+    def obtenerResistencia(id_raza):
+        for row in coneccion.cursor.execute('select RESISTENCIA_RAZA from RAZA where ID_RAZA=:1', [id_raza]):
+            return int(row[0])
+
+    def obtenerNombre(id_raza) -> str:
+        for row in coneccion.cursor.execute('select NOMBRE_RAZA from RAZA where ID_RAZA =:1', [id_raza]):
+            return row[0]
+
 
     
 

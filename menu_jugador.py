@@ -28,10 +28,9 @@ def crearPersonaje(id_jugador):
     # Raza del Personaje
     while(True):
         print('Seleccione la Raza de su Personaje: ')
-        razasDao.obtenerLista()
+        razasDao.mostrarLista()
         id_raza = input('#: ')
-        tipo_raza = razasDao.buscarID(id_raza)
-        if not tipo_raza:
+        if not id_raza:
             print('Valor Ingresado no Valido: ' + id_raza)
         else:
             # Atributos del Personaje
@@ -102,12 +101,7 @@ class menu_jugador():
                         print('Seleccione que personaje desea editar: ')
                         personajesDao.obtenerListaPersonaje(id_jugador)
                         opcion = input('#: ')
-                        if not opcion:
-                            print('Valor Ingresado no Valido: ' + opcion)
-                            break
-                        else:
-                            personajesDao.modificarEquipo(opcion,personajesDao.obtenerEstado(id_jugador))
-                            break
+                        personajesDao.modificarEquipo(opcion,personajesDao.obtenerEstado(opcion)) #Corregir
                     elif opcion == '2':
                         break
                     else:
