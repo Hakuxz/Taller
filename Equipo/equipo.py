@@ -7,7 +7,7 @@ class equipo:
         self.__tipoDano = tipoDano
 
     @property # ------------------------------------->>
-    def equipo(self) -> str:
+    def id(self) -> str:
         return self.__id_equipo
 
     @property # ------------------------------------->>
@@ -19,9 +19,9 @@ class equipo:
         return self.__tipo
 
     @property # ------------------------------------->>
-    def raza(self) -> int:
+    def dano(self) -> int:
         return self.__dano
 
     @property # ------------------------------------->>
-    def genero(self) -> str:
+    def tipoDano(self) -> str:
         return self.__tipoDano

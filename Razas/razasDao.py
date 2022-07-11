@@ -37,7 +37,7 @@ class razasDao:
         print('Esta seguro que desea borrar la raza: ')
         print('1.- Si, estoy seguro')
         print('2.- No, prefiero conservarla')
-        opcion = input('#: ')
+        opcion = input('#: ').strip()
         if opcion == '1':
             coneccion.cursor.execute('delete RAZA where ID_RAZA=:1',[id_raza])
             coneccion.connection.commit()
