@@ -1,3 +1,5 @@
+from asyncio.windows_events import NULL
+from inspect import _void
 from multiprocessing import connection
 from Equipo.equipoDao import equipoDao
 from Estados.estadosDao import estadosDao
@@ -15,6 +17,8 @@ tablaJG.columns.header = ['NOMBRE', 'NIVEL', 'INTELIGENCIA', 'SABIDURIA',
 tablaGM = BeautifulTable()
 tablaGM.columns.header = ['NOMBRE', 'ESTADO', 'NIVEL', 'EXP', 'JUGADOR', 'RAZA', 'EQUIPO']
 
+tablaSimple = BeautifulTable()
+tablaSimple.columns.header = ['NOMBRE']
 
 class personajesDao:
     def mostrar(self):  # Dibujar tabla Personaje
@@ -151,5 +155,15 @@ class personajesDao:
             print('Equipo Modificado!')
         else:
             print('Valor Ingresado no Valido: ' + str(estado))
-        
+
+    # Buscar
+    def buscarRaza(buscar_raza):
+        tablaSimple.clear()
+        for row in coneccion.cursor.execute('select NOMBRE_PERSONAJE from PERSONAJE where RAZA=:1',[buscar_raza]):
+            tablaSimple.rows.append(row)
+        for i in tablaSimple:
+            if row[i] == '':
+                print('vacio')
+            else:
+                print('lleno')
 

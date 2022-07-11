@@ -14,11 +14,6 @@ class razasDao:
             tabla.rows.append(row)
         print(tabla)
 
-    def crear(task):
-        coneccion.cursor.execute('insert into RAZA values(:1, :2, :3, :4, :5, :6)', [
-                                task.id, task.nombre, task.fuerza, task.destreza, task.resistencia, task.detalle])
-        coneccion.connection.commit()
-
     def mostrarPorID(id_raza): # Buscar en base a la ID de la raza
         tabla.clear()
         for row in coneccion.cursor.execute('select NOMBRE_RAZA, FUERZA_RAZA, DESTREZA_RAZA, RESISTENCIA_RAZA, DETALLE_RAZA from RAZA where ID_RAZA=:1', [id_raza]):
@@ -32,6 +27,11 @@ class razasDao:
     def mostrarListaEdicion(): # Mostrar Lista ID y Nombre de las razas editables
         for row in coneccion.cursor.execute('select * from RAZA where ID_RAZA > 3 order by ID_RAZA'):
             print(str(row[0]) + '.- ' + row[1])
+
+    def crear(task):
+        coneccion.cursor.execute('insert into RAZA values(:1, :2, :3, :4, :5, :6)', [
+                                task.id, task.nombre, task.fuerza, task.destreza, task.resistencia, task.detalle])
+        coneccion.connection.commit()
 
     def borrar(id_raza): # Borrar ID
         print('Esta seguro que desea borrar la raza: ')
@@ -47,7 +47,6 @@ class razasDao:
         else:
             print('Valor Ingresado no Valido: ' + opcion)
         
-
     # Obtener valores:
     def obtenerID():# Obtener la ultima ID y sumar 1
         for row in coneccion.cursor.execute('select ID_RAZA from RAZA where ID_RAZA=(select max(ID_RAZA) from RAZA)'):
@@ -68,6 +67,33 @@ class razasDao:
     def obtenerNombre(id_raza) -> str:
         for row in coneccion.cursor.execute('select NOMBRE_RAZA from RAZA where ID_RAZA =:1', [id_raza]):
             return row[0]
+
+    # Modificar Valores:
+    def modificarNombre(mod,id_raza):
+        coneccion.cursor.execute('update RAZA set NOMBRE_RAZA=:1 where ID_RAZA=:2',[mod,id_raza])
+        coneccion.connection.commit()
+        print('Nombre Modificado!')
+
+    def modificarFuerza(mod,id_raza):
+        coneccion.cursor.execute('update RAZA set FUERZA_RAZA=:1 where ID_RAZA=:2',[mod,id_raza])
+        coneccion.connection.commit()
+        print('Fuerza Modificada!')
+
+    def modificarDestreza(mod,id_raza):
+        coneccion.cursor.execute('update RAZA set DESTREZA_RAZA=:1 where ID_RAZA=:2',[mod,id_raza])
+        coneccion.connection.commit()
+        print('Destreza Modificada!')
+
+    def modificarResistencia(mod,id_raza):
+        coneccion.cursor.execute('update RAZA set RESISTENCIA_RAZA=:1 where ID_RAZA=:2',[mod,id_raza])
+        coneccion.connection.commit()
+        print('Resistencia Modificada!')
+
+    def modificarDetalle(mod,id_raza):
+        coneccion.cursor.execute('update RAZA set DETALLE_RAZA=:1 where ID_RAZA=:2',[mod,id_raza])
+        coneccion.connection.commit()
+        print('Detalle Modificado!')
+
 
 
     
