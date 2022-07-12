@@ -43,8 +43,11 @@ class equipoDao:
             return row[0]
 
     def obtenerLista():
+        listaID = []
         for row in coneccion.cursor.execute('select * from EQUIPO order by ID_EQUIPO'):
+            listaID.append(str(row[0]))
             print(str(row[0]) + '.- ' + row[1])
+        return listaID
 
     def obtenerID():# Obtener la ultima ID y sumar 1
         for row in coneccion.cursor.execute('select ID_EQUIPO from EQUIPO where ID_EQUIPO=(select max(ID_EQUIPO) from EQUIPO)'):

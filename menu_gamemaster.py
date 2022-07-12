@@ -14,6 +14,7 @@ from Estados.estados import estados
 from Razas.razas import razas
 #
 
+
 def pausarYvolver():
     print('1.- Volver: ')
     while(True):
@@ -23,6 +24,7 @@ def pausarYvolver():
         else:
             print('Valor Ingresado no Valido')
 
+
 def menuInterno1(variante):
     print('>> Menu ' + variante + ' >>')
     print('1.- Ver Todos')
@@ -31,18 +33,20 @@ def menuInterno1(variante):
     opcion = input('#: ').strip()
     return opcion
 
+
 def menuInterno2(plural, singular):
     print('>> Menu ' + plural + ' >>')
-    print('1.- Mostrar '+ plural)
+    print('1.- Mostrar ' + plural)
     print('2.- Crear ' + singular)
     print('3.- Buscar ' + singular)
-    print('4.- Editar '+ singular)
+    print('4.- Editar ' + singular)
     print('5.- Borrar ' + singular)
-    print('6.- Volver' )
+    print('6.- Volver')
     opcion = input('#: ').strip()
     return opcion
 
-def verificarNumero(valor):
+
+def verificarEntero(atributo, valor):
     pass
 
 # Menu ---------------------------------------->>
@@ -51,7 +55,8 @@ class menu_gamemaster():
         while(enFuncionamiento):
             os.system('cls')
             print('>> Bienvenido GameMaster: ' + nombre + ' >>')
-            print('Seleccione que opcion desea ingresando el numero correspondiente a esta:')
+            print(
+                'Seleccione que opcion desea ingresando el numero correspondiente a esta:')
             print('1.- Personajes')
             print('2.- Razas')
             print('3.- Poderes')
@@ -62,7 +67,7 @@ class menu_gamemaster():
             seleccion = input('#: ').strip()
             os.system('cls')
             # >>
-            if seleccion == '1': # Personajes
+            if seleccion == '1':  # Personajes
                 while(True):
                     opcion = menuInterno1('Personajes')
                     if opcion == '1':
@@ -70,15 +75,16 @@ class menu_gamemaster():
                     elif opcion == '2':
                         volver = True
                         while(volver):
-                            try:
                                 print('Seleccione el personaje que desea ver: ')
-                                personajesDao.obtenerLista()
+                                listaID = personajesDao.obtenerLista()
                                 personaje = int(input('#: '))
-                                personajesDao.obtenerPersonajePorID(personaje)
-                            except:
-                                print('Valor Ingresado no Valido: ' + personaje)
-                                return
-                            while(True):
+                                if personaje in listaID:
+                                    personajesDao.obtenerPersonajePorID(personaje)
+                                    volver = False
+                                else:
+                                    print('Valor Ingresado no Valido: ' + personaje)
+                        volver = True
+                        while(volver):
                                 print('Que desea hacer con el personaje seleccionado: ')
                                 print('1.- Otorgar experiencia')
                                 print('2.- Cambiar su estado')
@@ -122,55 +128,74 @@ class menu_gamemaster():
                         razasDao.crear(nueva_raza)
                         print('Su raza ' + nombre_raza + 'a sido Creada con Exito!')
                     elif opcion == '3': # >> Buscar
-                        print('Seleccione la raza que desea ver: ')
-                        razasDao.mostrarLista()
-                        ver_raza = input('#: ').strip()
-                        razasDao.mostrarPorID(ver_raza)
+                        while(True):
+                            print('Seleccione la raza que desea ver: ')
+                            listaID = razasDao.obtenerLista()
+                            ver_raza = input('#: ').strip()
+                            if ver_raza in listaID:
+                                razasDao.mostrarPorID(ver_raza)
+                                break
+                            else:
+                                print('Valor Ingresado no Valido: ' + ver_raza)
                     elif opcion == '4': # >> Editar
-                        print('Seleccione la raza que desea editar, las razas basicas no pueden ser editadas: ')
-                        razasDao.mostrarListaEdicion()
-                        editar_raza = input('#: ').strip()
-                        if editar_raza == '0' or editar_raza == '1' or editar_raza == '2' or editar_raza == '3':
-                            print('Lo sentimos pero las razas basicas no son modificables')
-                            break
-                        razasDao.mostrarPorID(editar_raza)
-                        print('Que desea modificar de la raza: '+ razasDao.obtenerNombre(editar_raza))
-                        print('1.- Nombre')
-                        print('2.- Fuerza')
-                        print('3.- Destreza')
-                        print('4.- Resistencia')
-                        print('5.- Detalle')
-                        modificar_raza = input('#: ').strip()
-                        if modificar_raza == '1':
-                            print('Ingrese el nuevo Nombre que desea otorgarle a la raza ' + razasDao.obtenerNombre(editar_raza))
-                            nuevo_nombre = input('#: ')
-                            razasDao.modificarNombre(nuevo_nombre,editar_raza)
-                        elif modificar_raza == '2':
-                            print('Ingrese el nuevo valor de Fuerza que desea otorgarle a la raza ' + razasDao.obtenerNombre(editar_raza))
-                            nuevo_atributo = input('#: ')
-                            razasDao.modificarFuerza(nuevo_atributo,editar_raza)
-                        elif modificar_raza == '3':
-                            print('Ingrese el nuevo valor de Destreza que desea otorgarle a la raza ' + razasDao.obtenerNombre(editar_raza))
-                            nuevo_atributo = input('#: ')
-                            razasDao.modificarDestreza(nuevo_atributo,editar_raza)
-                        elif modificar_raza == '4':
-                            print('Ingrese el nuevo valor de Resistencia que desea otorgarle a la raza ' + razasDao.obtenerNombre(editar_raza))
-                            nuevo_atributo = input('#: ')
-                            razasDao.modificarResistencia(nuevo_atributo,editar_raza)
-                        elif modificar_raza == '5':
-                            print('Ingrese el nuevo Detalle que desea otorgarle a la raza ' + razasDao.obtenerNombre(editar_raza))
-                            nuevo_detalle = input('#: ')
-                            razasDao.modificarDetalle(nuevo_detalle,editar_raza)
-                        else:
-                            print('Valor Ingresado no Valido: ' + modificar_raza)
+                        while(True):
+                            print('Seleccione la raza que desea editar, las razas basicas no pueden ser editadas: ')
+                            listaID = razasDao.obtenerListaEdicion()
+                            editar_raza = input('#: ').strip()
+                            if editar_raza in listaID:
+                                if editar_raza == '0' or editar_raza == '1' or editar_raza == '2' or editar_raza == '3':
+                                    print('Lo sentimos pero las razas basicas no son modificables')
+                                    break
+                                razasDao.mostrarPorID(editar_raza)
+                            else:
+                                print('Valor Ingresado no Valido: ' + opcion)
+                            print('Que desea modificar de la raza: '+ razasDao.obtenerNombre(editar_raza))
+                            print('1.- Nombre')
+                            print('2.- Fuerza')
+                            print('3.- Destreza')
+                            print('4.- Resistencia')
+                            print('5.- Detalle')
+                            modificar_raza = input('#: ').strip()
+                            if modificar_raza == '1':
+                                print('Ingrese el nuevo Nombre que desea otorgarle a la raza ' + razasDao.obtenerNombre(editar_raza))
+                                nuevo_nombre = input('#: ')
+                                razasDao.modificarNombre(nuevo_nombre,editar_raza)
+                                break
+                            elif modificar_raza == '2':
+                                print('Ingrese el nuevo valor de Fuerza que desea otorgarle a la raza ' + razasDao.obtenerNombre(editar_raza))
+                                nuevo_atributo = input('#: ')
+                                razasDao.modificarFuerza(nuevo_atributo,editar_raza)
+                                break
+                            elif modificar_raza == '3':
+                                print('Ingrese el nuevo valor de Destreza que desea otorgarle a la raza ' + razasDao.obtenerNombre(editar_raza))
+                                nuevo_atributo = input('#: ')
+                                razasDao.modificarDestreza(nuevo_atributo,editar_raza)
+                                break
+                            elif modificar_raza == '4':
+                                print('Ingrese el nuevo valor de Resistencia que desea otorgarle a la raza ' + razasDao.obtenerNombre(editar_raza))
+                                nuevo_atributo = input('#: ')
+                                razasDao.modificarResistencia(nuevo_atributo,editar_raza)
+                                break
+                            elif modificar_raza == '5':
+                                print('Ingrese el nuevo Detalle que desea otorgarle a la raza ' + razasDao.obtenerNombre(editar_raza))
+                                nuevo_detalle = input('#: ')
+                                razasDao.modificarDetalle(nuevo_detalle,editar_raza)
+                                break
+                            else:
+                                print('Valor Ingresado no Valido: ' + modificar_raza)
                     elif opcion == '5': # >> Borrar
-                        print('Seleccione que raza desea Borrar: ')
-                        razasDao.mostrarListaEdicion()
-                        borrar_raza = input('#: ').strip()
-                        if borrar_raza == '0' or borrar_raza == '1' or borrar_raza == '2' or borrar_raza == '3':
-                            print('Lo sentimos pero las razas basicas no son modificables')
-                            break
-                        razasDao.borrar(borrar_raza) # Buscar como no eliminar si la raza esta en uso
+                        while(True):
+                            print('Seleccione que raza desea Borrar: ')
+                            listaID = razasDao.obtenerListaEdicion()
+                            borrar_raza = input('#: ').strip()
+                            if borrar_raza in listaID:
+                                if borrar_raza == '0' or borrar_raza == '1' or borrar_raza == '2' or borrar_raza == '3':
+                                    print('Lo sentimos pero las razas basicas no son modificables')
+                                    break
+                                razasDao.borrar(borrar_raza) # Buscar como no eliminar si la raza esta en uso
+                                break
+                            else:
+                                print('Valor Ingresado no Valido: ' + opcion)
                     elif opcion == '6': # >> Salir
                         break
                     else:
@@ -240,22 +265,37 @@ class menu_gamemaster():
                     nuevo_equipo = equipo(equipoDao.obtenerID(),nombre_equipo,tipo_equipo,int(dano_equipo),tipo_dano)
                     equipoDao.crear(nuevo_equipo)
                 elif opcion == '3':
-                    print('Seleccione que Equipo desea ver: ')
-                    equipoDao.obtenerLista()
-                    ver_equipo = input('#: ').strip()
-                    equipoDao.mostrarPorID(ver_equipo)
+                    while(True):
+                        print('Seleccione que Equipo desea ver: ')
+                        listaID = equipoDao.obtenerLista()
+                        ver_equipo = input('#: ').strip()
+                        if ver_equipo in listaID:
+                            equipoDao.mostrarPorID(ver_equipo)
+                            break
+                        else:
+                            print('Valor Ingresado no Valido: ' + ver_equipo)
                 elif opcion == '4':
-                    print('>> Seleccione el Equipo que desea renombrar: S')
-                    equipoDao.obtenerLista()
-                    id_equipo = input('#: ')
-                    print('Seleccione el nombre que desea otorgarle: ')
-                    nuevo_nombre = input('#: ')
-                    equipoDao.cambiarNombre(nuevo_nombre,id_equipo)
-                elif opcion == '5':
-                    print('Seleccione el equipo que desea borrar')
-                    equipoDao.obtenerLista()
-                    borrar_equipo = input('#: ').strip()
-                    equipoDao.borrar(borrar_equipo)
+                    while(True):
+                        print('>> Seleccione el Equipo que desea renombrar: S')
+                        listaID = equipoDao.obtenerLista()
+                        id_equipo = input('#: ')
+                        if id_equipo in listaID:
+                            print('Seleccione el nombre que desea otorgarle: ')
+                            nuevo_nombre = input('#: ')
+                            equipoDao.cambiarNombre(nuevo_nombre,id_equipo)
+                            break
+                        else:
+                            print('Valor Ingresado no Valido: ' + id_equipo)
+                elif opcion == '5': # corregir in if id
+                    while(True):
+                        print('Seleccione el equipo que desea borrar')
+                        listaID = equipoDao.obtenerLista()
+                        borrar_equipo = input('#: ').strip()
+                        if borrar_equipo in listaID:
+                            equipoDao.borrar(borrar_equipo)
+                            break
+                        else:
+                            print('Valor Ingresado no Valido: ' + id_equipo)
                 elif opcion == '6':
                     break
                 else:

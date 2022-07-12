@@ -20,13 +20,19 @@ class razasDao:
             tabla.rows.append(row)
         print(tabla)
     
-    def mostrarLista(): # Mostrar lista ID y Nombre
+    def obtenerLista(): # Mostrar lista ID y Nombre
+        listaID = []
         for row in coneccion.cursor.execute('select * from RAZA order by ID_RAZA'):
+            listaID.append(str(row[0]))
             print(str(row[0]) + '.- ' + row[1])
+        return listaID
 
-    def mostrarListaEdicion(): # Mostrar Lista ID y Nombre de las razas editables
+    def obtenerListaEdicion(): # Mostrar Lista ID y Nombre de las razas editables
+        listaID = []
         for row in coneccion.cursor.execute('select * from RAZA where ID_RAZA > 3 order by ID_RAZA'):
+            listaID.append(str(row[0]))
             print(str(row[0]) + '.- ' + row[1])
+        return listaID
 
     def crear(task):
         coneccion.cursor.execute('insert into RAZA values(:1, :2, :3, :4, :5, :6)', [
