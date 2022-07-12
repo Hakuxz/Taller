@@ -46,8 +46,13 @@ def crearUsuario(): # Paso 1
 
 def creacionUsuario(tipo): # Paso 2
     os.system('cls')
-    print('Seleccione un NickName:')
-    nick = input('#: ').upper().strip() # Ingreso Nickname en Mayuscula
+    while(True):
+        print('Seleccione un NickName:')
+        nick = input('#: ').upper().strip() # Ingreso Nickname en Mayuscula
+        if nick == '' or nick == ' ':
+            print('Debe ingresar un nombre Valido')
+        else:
+            break
 
     #---Inicio verificacion de Nickname--->>
     if gamemaster_dao.buscarNombre(nick) or jugador_dao.buscarNombre(nick):
@@ -55,8 +60,13 @@ def creacionUsuario(tipo): # Paso 2
         return
     #---Final verificacion de Nickname--->>
 
-    print('Cree su Contraseña:')
-    cc = input('#: ').strip() # Ingreso Contraseña
+    while(True):
+        print('Cree su Contraseña:')
+        cc = input('#: ').strip() # Ingreso Contraseña
+        if cc == '' or cc == ' ':
+            print('Debe ingresar una contraseña')
+        else:
+            break
 
     if tipo == 'gamemaster':
         print('Inserte de que va su historia:')

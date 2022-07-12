@@ -20,29 +20,35 @@ def pausarYvolver():
         else:
             print('Valor Ingresado no Valido')
 
+def comprobarNumero(atributo):
+    while(True):
+        try:
+            print('Ingrese el valor de ' + atributo)
+            numero = int(input('#: '))
+            return numero
+        except:
+            print('Valor Ingresado no Valido, Ingrese un Numero por favor')
+
 def crearPersonaje(id_jugador):
     os.system('cls')
     print('>> Creacion de Personaje >>')
     print('Ingrese el nombre de su Personaje: ')
-    nombre_personaje = input('#: ')
+    nombre_personaje = input('#: ').capitalize().strip()
     # Raza del Personaje
     while(True):
         print('Seleccione la Raza de su Personaje: ')
-        razasDao.mostrarLista()
+        listaID = razasDao.obtenerLista()
         id_raza = input('#: ')
-        if not id_raza:
-            print('Valor Ingresado no Valido: ' + id_raza)
-        else:
-            # Atributos del Personaje
+        if id_raza in listaID:
             while(True):
                 print('A continuacion posees 12 puntos a repartir entre los seis atributos del personaje: ')
                 print('Fuerza, Destreza, Reistencia, Inteligencia, Sabiduria y Carisma')
-                fuerza = int(input('Fuerza: #: '))
-                destreza = int(input('Destreza: #: '))
-                resistencia = int(input('Resistencia: #: '))
-                inteligencia = int(input('Inteligencia: #: '))
-                sabiduria = int(input('Sabiduria: #: '))
-                carisma = int(input('Carisma: #: '))
+                fuerza = comprobarNumero('Fuerza')
+                destreza = comprobarNumero('Destreza')
+                resistencia = comprobarNumero('Resistencia')
+                inteligencia = comprobarNumero('Inteligencia')
+                sabiduria = comprobarNumero('Sabiduria')
+                carisma = comprobarNumero('Carisma')
                 atributos = [fuerza, destreza, resistencia,
                              inteligencia, sabiduria, carisma]
                 total_puntos = int(fuerza) + int(destreza) + int(resistencia) + int(inteligencia) + int(sabiduria) + int(carisma)
@@ -55,17 +61,21 @@ def crearPersonaje(id_jugador):
                 else:
                     while(True):
                         print('Seleccione su equipo inicial: ')
-                        equipoDao.obtenerLista()
+                        listaID = equipoDao.obtenerLista()
                         id_equipo = input('#: ')
-                        if not id_equipo:
-                            return 'Valor Ingresado no Valido: ' + id_equipo
-                        else: 
+                        if id_equipo in listaID:
                             atributos[0] += razasDao.obtenerFuerza(id_raza)
                             atributos[1] += razasDao.obtenerDestreza(id_raza)
                             atributos[2] += razasDao.obtenerResistencia(id_raza)
                             nuevo_personaje = personajes(int(personajesDao.obtenerID()), nombre_personaje, 1, 1, int(atributos[3]), int(atributos[4]), int(atributos[5]), 0, int(atributos[0]), int(atributos[1]), int(atributos[2]), int(id_jugador), int(id_equipo), int(id_raza))
                             personajesDao.crear(nuevo_personaje)
                             return
+                        else:
+                            print('Valor Ingresado no Valido: ' + id_equipo)
+        else:
+            print('Valor Ingresado no Valido: ' + id_raza)
+            # Atributos del Personaje
+            
     # Fin Creacion del Personaje
 
 # Menu ---------------------------------------->>
