@@ -25,7 +25,10 @@ def comprobarNumero(atributo):
         try:
             print('Ingrese el valor de ' + atributo)
             numero = int(input('#: '))
-            return numero
+            if numero >= 0 and numero <= 10:
+                return numero
+            else:
+                print('Valor Ingresado no Valido')
         except:
             print('Valor Ingresado no Valido, Ingrese un Numero por favor')
 
