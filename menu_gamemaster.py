@@ -8,6 +8,7 @@ from Estados.estadosDao import estadosDao
 from Habilidades.habilidadesDao import habilidadesDao
 from Personajes.personajesDao import personajesDao
 from Personajes.personajes import personajes
+from Poderes.poderes import poderes
 from Poderes.poderesDao import poderesDao
 from Razas.razasDao import razasDao
 from Estados.estados import estados
@@ -45,9 +46,16 @@ def menuInterno2(plural, singular):
     opcion = input('#: ').strip()
     return opcion
 
-
-def verificarEntero(atributo, valor):
-    pass
+def comprobarNumero():
+    while(True):
+        try:
+            numero = int(input('#: '))
+            if numero >= 0 and numero <= 10:
+                return numero
+            else:
+                print('Valor Ingresado no Valido')
+        except:
+            print('Valor Ingresado no Valido, Ingrese un Numero por favor')
 
 # Menu ---------------------------------------->>
 class menu_gamemaster():
@@ -112,9 +120,9 @@ class menu_gamemaster():
             elif seleccion == '2': # Razas
                 while(True):
                     opcion = menuInterno2('Razas','Raza')
-                    if opcion == '1': # >> Mostrar
+                    if opcion == '1': # >> Mostrar Raza
                         razasDao.mostrar()
-                    elif opcion == '2': # >> Crear
+                    elif opcion == '2': # >> Crear Raza
                         print('>> Crear Raza >>')
                         print('Paso 1: Ingrese el nombre de su raza')
                         nombre_raza = input('#: ').strip()
@@ -127,7 +135,7 @@ class menu_gamemaster():
                         nueva_raza = razas(razasDao.obtenerID(), nombre_raza, int(fuerza),int(destreza),int(resistencia),detalle)
                         razasDao.crear(nueva_raza)
                         print('Su raza ' + nombre_raza + 'a sido Creada con Exito!')
-                    elif opcion == '3': # >> Buscar
+                    elif opcion == '3': # >> Buscar Raza
                         while(True):
                             print('Seleccione la raza que desea ver: ')
                             listaID = razasDao.obtenerLista()
@@ -137,7 +145,7 @@ class menu_gamemaster():
                                 break
                             else:
                                 print('Valor Ingresado no Valido: ' + ver_raza)
-                    elif opcion == '4': # >> Editar
+                    elif opcion == '4': # >> Editar Raza
                         while(True):
                             print('Seleccione la raza que desea editar, las razas basicas no pueden ser editadas: ')
                             listaID = razasDao.obtenerListaEdicion()
@@ -183,7 +191,7 @@ class menu_gamemaster():
                                 break
                             else:
                                 print('Valor Ingresado no Valido: ' + modificar_raza)
-                    elif opcion == '5': # >> Borrar
+                    elif opcion == '5': # >> Borrar Raza
                         while(True):
                             print('Seleccione que raza desea Borrar: ')
                             listaID = razasDao.obtenerListaEdicion()
@@ -196,16 +204,69 @@ class menu_gamemaster():
                                 break
                             else:
                                 print('Valor Ingresado no Valido: ' + opcion)
-                    elif opcion == '6': # >> Salir
+                    elif opcion == '6': # >> Salir Raza
                         break
                     else:
                         print('Valor Ingresado no Valido: ' + opcion)
                 pausarYvolver()
             # >>
             elif seleccion == '3': # Poderes
+                opcion = menuInterno2('Poderes','Poder')
+                if opcion == '1': # >> Mostrar Poderes
+                    poderesDao.mostrar()
+                elif opcion == '2': # >> Crear Poderes
+                    while(True):
+                        print('>> Crear Poder >>')
+                        print('Ingrese el nombre del poder que desea crear: ')
+                        nombre_poder = input('#: ').strip().capitalize()
+                        print('Ingrese la descripcion de el nuevo Poder: ')
+                        detalle_poder = input('#: ').strip().capitalize()
+                        print('Seleccione la Raza a la cual pertenece el Poder: ')
+                        listaID = razasDao.obtenerLista()
+                        raza_poder = input('#: ').strip().capitalize()
+                        if raza_poder in listaID:
+                            nuevo_poder = poderes(poderesDao.obtenerID(),nombre_poder,detalle_poder,raza_poder)  
+                            poderesDao.crear(nuevo_poder)
+                            break
+                        else:
+                            print('Valor Ingresado no Valido: ' + raza_poder)
+                elif opcion == '3': # >> Buscar Poderes
+                    while(True):
+                        print('>> Buscar Poder >>')
+                        print('Seleccione el Poder que busca: ')
+                        listaID = poderesDao.obtenerLista()
+                        buscar_poder = input('#: ').strip()
+                        if buscar_poder in listaID:
+                            poderesDao.mostrarPorID(buscar_poder)
+                            break
+                        else:
+                            print('Valor Ingresado no Valido: ' + raza_poder)
+                elif opcion == '4': # >> Editar Poderes
+                    pass
+                elif opcion == '5': # >> Borrar Poderes
+                    pass
+                elif opcion == '6': # >> Salir Poderes
+                    pass
+                else:
+                    print('Valor Ingresado no Valido: ' + opcion)
                 pausarYvolver()
             # >>
             elif seleccion == '4': # Habilidades
+                opcion = menuInterno2('Habilidades','Habilidad')
+                if opcion == '1': # >> Mostrar Habilidades
+                    pass
+                elif opcion == '2': # >> Crear Habilidades
+                    pass
+                elif opcion == '3': # >> Buscar Habilidades
+                    pass
+                elif opcion == '4': # >> Editar Habilidades
+                    pass
+                elif opcion == '5': # >> Borrar Habilidades
+                    pass
+                elif opcion == '6': # >> Salir Habilidades
+                    pass
+                else:
+                    print('Valor Ingresado no Valido: ' + opcion)
                 pausarYvolver()
             # >>
             elif seleccion == '5': # Equipo
