@@ -242,9 +242,41 @@ class menu_gamemaster():
                         else:
                             print('Valor Ingresado no Valido: ' + raza_poder)
                 elif opcion == '4': # >> Editar Poderes
-                    pass
+                    while(True):
+                        print('>> Editar Poder >>')
+                        print('Seleccione el Poder que deseas editar: ')
+                        listaID = poderesDao.obtenerLista()
+                        editar_poder = input('#: ').strip()
+                        if editar_poder in listaID:
+                            poderesDao.mostrarPorID(editar_poder)
+                        else:
+                            print('Valor Ingresado no Valido: ' + raza_poder)
+                        print('Que desea modificar de el Poder: '+ poderesDao.obtenerNombre(editar_raza))
+                        print('1.- Nombre')
+                        print('2.- Descripcion')
+                        print('3.- Volver')
+                        opcion = input('#: ').strip()
+                        if opcion == '1':
+                            pass
+                        elif opcion == '2':
+                            pass
+                        elif opcion == '3':
+                            break
+                        else:
+                            print('Valor Ingresado no Valido: ' + opcion)
                 elif opcion == '5': # >> Borrar Poderes
-                    pass
+                    while(True):
+                        print('Seleccione que raza desea borrar: ')
+                        listaID = poderesDao.obtenerListaAcotada()
+                        borrar_poder = input('#: ').strip()
+                        if borrar_poder in listaID:
+                            if borrar_poder == '0'or borrar_poder == '1' or borrar_poder == '2' or borrar_poder == '3':
+                                print('Lo sentimos pero los poderes basicos no son modificables')
+                                break
+                            poderesDao.borrar(borrar_poder)
+                            break
+                        else:
+                            print('Valor Ingresado no Valido: ' + borrar_poder)
                 elif opcion == '6': # >> Salir Poderes
                     pass
                 else:
