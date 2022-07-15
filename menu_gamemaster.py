@@ -13,6 +13,7 @@ from Poderes.poderesDao import poderesDao
 from Razas.razasDao import razasDao
 from Estados.estados import estados
 from Razas.razas import razas
+from Habilidades.habilidades import habilidades
 #
 
 
@@ -221,7 +222,7 @@ class menu_gamemaster():
                         nombre_poder = input('#: ').strip().capitalize()
                         print('Ingrese la descripcion de el nuevo Poder: ')
                         detalle_poder = input('#: ').strip().capitalize()
-                        print('Seleccione la Raza a la cual pertenece el Poder: ')
+                        print('Seleccione la raza a la cual pertenece el Poder: ')
                         listaID = razasDao.obtenerLista()
                         raza_poder = input('#: ').strip().capitalize()
                         if raza_poder in listaID:
@@ -251,22 +252,21 @@ class menu_gamemaster():
                             poderesDao.mostrarPorID(editar_poder)
                         else:
                             print('Valor Ingresado no Valido: ' + raza_poder)
-                        print('Que desea modificar de el Poder: '+ poderesDao.obtenerNombre(editar_raza))
-                        print('1.- Nombre')
-                        print('2.- Descripcion')
-                        print('3.- Volver')
+                        print('Que desea modificar de el Poder: '+ poderesDao.obtenerNombre(editar_poder))
+                        print('1.- Descripcion')
+                        print('2.- Volver')
                         opcion = input('#: ').strip()
                         if opcion == '1':
-                            pass
+                            print('Ingrese la nueva descripción que desea otorgarle: ')
+                            nuevo_detalle_poder = input('#: ').strip().capitalize()
+                            poderesDao.modificarDetalle(nuevo_detalle_poder,editar_poder)
                         elif opcion == '2':
-                            pass
-                        elif opcion == '3':
                             break
                         else:
                             print('Valor Ingresado no Valido: ' + opcion)
                 elif opcion == '5': # >> Borrar Poderes
                     while(True):
-                        print('Seleccione que raza desea borrar: ')
+                        print('Seleccione el poder desea borrar: ')
                         listaID = poderesDao.obtenerListaAcotada()
                         borrar_poder = input('#: ').strip()
                         if borrar_poder in listaID:
@@ -286,15 +286,70 @@ class menu_gamemaster():
             elif seleccion == '4': # Habilidades
                 opcion = menuInterno2('Habilidades','Habilidad')
                 if opcion == '1': # >> Mostrar Habilidades
-                    pass
+                    habilidadesDao.mostrar()
                 elif opcion == '2': # >> Crear Habilidades
-                    pass
+                    while(True):
+                        print('>> Crear Habilidad >>')
+                        print('Ingrese el nombre de la habilidad que desea crear: ')
+                        nombre_habilidad = input('#: ').strip().capitalize()
+                        print('Ingrese la descripcion de la nueva habilidad: ')
+                        detalle_habilidad = input('#: ').strip().capitalize()
+                        print('Seleccione la raza a la cual pertenece la habilidad: ')
+                        listaID = razasDao.obtenerLista()
+                        raza_habilidad = input('#: ').strip().capitalize()
+                        if raza_habilidad in listaID:
+                            nueva_habilidad = habilidades(habilidadesDao.obtenerID(),nombre_habilidad,detalle_habilidad,raza_habilidad)  
+                            habilidadesDao.crear(nueva_habilidad)
+                            break
+                        else:
+                            print('Valor Ingresado no Valido: ' + raza_habilidad)
                 elif opcion == '3': # >> Buscar Habilidades
-                    pass
+                    while(True):
+                        print('>> Buscar Habilidad >>')
+                        print('Seleccione la habilidad que busca: ')
+                        listaID = habilidadesDao.obtenerLista()
+                        buscar_habilidad = input('#: ').strip()
+                        if buscar_habilidad in listaID:
+                            habilidadesDao.mostrarPorID(buscar_habilidad)
+                            break
+                        else:
+                            print('Valor Ingresado no Valido: ' + raza_habilidad)
                 elif opcion == '4': # >> Editar Habilidades
-                    pass
+                    while(True):
+                        print('>> Editar Habilidad >>')
+                        print('Seleccione la habilidad que deseas editar: ')
+                        listaID = habilidadesDao.obtenerLista()
+                        editar_habilidad = input('#: ').strip()
+                        if editar_habilidad in listaID:
+                            habilidadesDao.mostrarPorID(editar_habilidad)
+                        else:
+                            print('Valor Ingresado no Valido: ' + raza_habilidad)
+                        print('Que desea modificar de la habilidad: '+ habilidadesDao.obtenerNombre(editar_habilidad))
+                        print('1.- Descripcion')
+                        print('2.- Volver')
+                        opcion = input('#: ').strip()
+                        if opcion == '1':
+                            print('Ingrese la nueva descripción que desea otorgarle: ')
+                            nuevo_detalle_habilidad = input('#: ').strip().capitalize()
+                            habilidadesDao.modificarDetalle(nuevo_detalle_habilidad,editar_habilidad)
+                            break
+                        elif opcion == '2':
+                            break
+                        else:
+                            print('Valor Ingresado no Valido: ' + opcion)
                 elif opcion == '5': # >> Borrar Habilidades
-                    pass
+                    while(True):
+                        print('Seleccione que habilidad desea borrar: ')
+                        listaID = habilidadesDao.obtenerListaAcotada()
+                        borrar_habilidad = input('#: ').strip()
+                        if borrar_habilidad in listaID:
+                            if borrar_habilidad == '0'or borrar_habilidad == '1' or borrar_habilidad == '2' or borrar_habilidad == '3' or borrar_habilidad == '4'or borrar_habilidad == '5' or borrar_habilidad == '6' or borrar_habilidad == '7':
+                                print('Lo sentimos pero las habilidades basicas no son modificables')
+                                break
+                            habilidadesDao.borrar(borrar_habilidad)
+                            break
+                        else:
+                            print('Valor Ingresado no Valido: ' + borrar_habilidad)         
                 elif opcion == '6': # >> Salir Habilidades
                     pass
                 else:

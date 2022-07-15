@@ -3,12 +3,12 @@ from beautifultable import BeautifulTable
 from Habilidades.habilidades import habilidades
 
 tabla = BeautifulTable()
-tabla.columns.header = ['Nombre', 'Detalle']
+tabla.columns.header = ['NOMBRE', 'DESCRIPCIÓN','RAZA']
 
 class habilidadesDao:
     def mostrar():  # Dibujar tabla
         tabla.clear()
-        for row in coneccion.cursor.execute('select NOMBRE_HABILIDAD, DETALLE_HABILIDAD from HABILIDAD order by ID_HABILIDAD'):
+        for row in coneccion.cursor.execute('select H.NOMBRE_HABILIDAD, H.DETALLE_HABILIDAD, R.NOMBRE_RAZA from HABILIDAD H inner join RAZA R on H.RAZA_HABILIDAD=R.ID_RAZA order by ID_HABILIDAD'):
             tabla.rows.append(row)
         print(tabla)
 
@@ -20,7 +20,7 @@ class habilidadesDao:
 
     def obtenerListaAcotada(): # Mostrar Lista ID y Nombre de los poderes editables
         listaID = []
-        for row in coneccion.cursor.execute('select * from HABILIDAD where ID_HABILIDAD > 3 order by ID_HABILIDAD'):
+        for row in coneccion.cursor.execute('select * from HABILIDAD where ID_HABILIDAD > 7 order by ID_HABILIDAD'):
             listaID.append(str(row[0]))
             print(str(row[0]) + '.- ' + row[1])
         return listaID
@@ -59,3 +59,8 @@ class habilidadesDao:
             return
         else:
             print('Valor Ingresado no Valido: ' + opcion)
+
+    def modificarDetalle(mod,id_habilidad):
+        coneccion.cursor.execute('update HABILIDAD set DETALLE_HABILIDAD=:1 where ID_HABILIDAD=:2',[mod,id_habilidad])
+        coneccion.connection.commit()
+        print('Descripción Modificada!')

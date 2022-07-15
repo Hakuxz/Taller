@@ -3,7 +3,7 @@ from beautifultable import BeautifulTable
 from Poderes.poderes import poderes
 
 tabla = BeautifulTable()
-tabla.columns.header = ['NOMBRE','DETALLE','RAZA']
+tabla.columns.header = ['NOMBRE','DESCRIPCIÓN','RAZA']
 
 class poderesDao:
     def mostrar():  # Dibujar tabla
@@ -59,3 +59,8 @@ class poderesDao:
             return
         else:
             print('Valor Ingresado no Valido: ' + opcion)
+
+    def modificarDetalle(mod,id_poder):
+        coneccion.cursor.execute('update PODER set DETALLE_PODER=:1 where ID_PODER=:2',[mod,id_poder])
+        coneccion.connection.commit()
+        print('Descripción Modificada!')
