@@ -3,6 +3,8 @@ from inspect import _void
 from multiprocessing import connection
 from Equipo.equipoDao import equipoDao
 from Estados.estadosDao import estadosDao
+from HabilidadesPJ.habilidadesPJDao import habilidadesPJDao
+from PoderesPJ.poderesPJDao import poderesPJDao
 from coneccion import coneccion
 from beautifultable import BeautifulTable
 from Razas.razasDao import razasDao
@@ -33,9 +35,15 @@ class personajesDao:
             tablaGM.rows.append(row)
         print(tablaGM)
 
-    def obtenerPersonajeJugador(id_jugador): #Obtener valores de un personaje mediante su ID : JG
+    def obtenerPersonajeJugador(id_jugador): #Obtener valores de un personaje mediante su ID Jugador: JG
         tablaJG.clear()
         for row in coneccion.cursor.execute('select P.NOMBRE_PERSONAJE, P.NIVEL_PERSONAJE, P.INTELIGENCIA_PERSONAJE, P.SABIDURIA_PERSONAJE, P.CARISMA_PERSONAJE, P.FUERZA, P.DESTREZA, P.RESISTENCIA, R.NOMBRE_RAZA, E.NOMBRE_EQUIPO from PERSONAJE P inner join RAZA R on P.RAZA=R.ID_RAZA inner join EQUIPO E on P.EQUIPO=E.ID_EQUIPO where ID_JUGADOR=:1 order by ID_PERSONAJE',[id_jugador]):
+            tablaJG.rows.append(row)
+        print(tablaJG)
+
+    def obtenerPersonajeJugadorPorID(id_personaje): #Obtener valores de un personaje mediante su ID Personaje: JG
+        tablaJG.clear()
+        for row in coneccion.cursor.execute('select P.NOMBRE_PERSONAJE, P.NIVEL_PERSONAJE, P.INTELIGENCIA_PERSONAJE, P.SABIDURIA_PERSONAJE, P.CARISMA_PERSONAJE, P.FUERZA, P.DESTREZA, P.RESISTENCIA, R.NOMBRE_RAZA, E.NOMBRE_EQUIPO from PERSONAJE P inner join RAZA R on P.RAZA=R.ID_RAZA inner join EQUIPO E on P.EQUIPO=E.ID_EQUIPO where P.ID_PERSONAJE=:1 order by ID_PERSONAJE',[id_personaje]):
             tablaJG.rows.append(row)
         print(tablaJG)
 
@@ -54,6 +62,10 @@ class personajesDao:
     def obtenerID() -> int:
         for row in coneccion.cursor.execute('select ID_PERSONAJE from PERSONAJE where ID_PERSONAJE=(select max(ID_PERSONAJE) from PERSONAJE)'):
             return int(row[0])+1
+
+    def obtenerUtimaID() -> int:
+        for row in coneccion.cursor.execute('select ID_PERSONAJE from PERSONAJE where ID_PERSONAJE=(select max(ID_PERSONAJE) from PERSONAJE)'):
+            return int(row[0])
 
     def obtenerEstado(id_personaje):
         for row in coneccion.cursor.execute('select ESTADO_PERSONAJE from PERSONAJE where ID_PERSONAJE=:1',[id_personaje]):

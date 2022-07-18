@@ -1,3 +1,4 @@
+from queue import Empty
 from coneccion import coneccion
 from beautifultable import BeautifulTable
 from Razas.razas import razas
@@ -40,6 +41,14 @@ class razasDao:
         coneccion.connection.commit()
 
     def borrar(id_raza): # Borrar ID
+        # lista = []
+        # for row in coneccion.cursor.execute('select P.ID_PERSONAJE from PERSONAJE P inner join RAZA R on P.RAZA=R.ID_RAZA where R.ID_RAZA=:1',[id_raza]):
+        #     lista.append(row)
+        #     if len(lista) == 0:
+        #         print('vacio')
+        #     else:
+        #         print('Lo sentimos no puede borrar una raza la cual posee personajes utilizandola.')
+        #         return
         print('Esta seguro que desea borrar la raza: ')
         print('1.- Si, estoy seguro')
         print('2.- No, prefiero conservarla')
