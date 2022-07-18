@@ -19,13 +19,13 @@ def ingresoUsuario():
     system('cls')
     print(chr(27)+"[1;4;37m"+'Iniciar Sesión'+'\033[0;m')
     print()
-    print(chr(27)+"[1;3;33m"+'Ingrese su Nombre de Usuario: ')
+    print(chr(27)+"[1;3;33m"+'Ingrese su Nombre de Usuario: '+'\033[0;m')
     print()
-    nnUsuario = input("\033[0;m"+'» ').upper().strip()  # Ingreso Nickname en Mayuscula
+    nnUsuario = input('» ').upper().strip()  # Ingreso Nickname en Mayuscula
     print()
-    print(chr(27)+"[1;3;33m"+'Ingrese su Contraseña: ')
+    print(chr(27)+"[1;3;33m"+'Ingrese su Contraseña: '+'\033[0;m')
     print()
-    ccUsuario = input("\033[0;m"+'» ').strip()
+    ccUsuario = input('» ').strip()
     if jugador_dao.comprobarUsuario(nnUsuario, ccUsuario):
         menu = menu_jugador(enFunconamiento, nnUsuario,
                             jugador_dao.obtenerID(nnUsuario))
@@ -34,8 +34,8 @@ def ingresoUsuario():
                                jugador_dao.obtenerID(nnUsuario))
     else:
         system('cls')
-        print(chr(27)+"[1;31m"+'Su Nombre o Contraseña no son validos!')
-        time.sleep(1)
+        print(chr(27)+"[1;31m"+'Su Nombre o Contraseña no son validos!'+'\033[0;m')
+        time.sleep(2)
 
 
 def crearUsuario():  # Paso 1
@@ -55,7 +55,7 @@ def crearUsuario():  # Paso 1
         return
     else:
         system('cls')
-        print(chr(27)+"[1;31m"+'La Opción ' + opcion + ' Ingresada no es Valida!')
+        print(chr(27)+"[1;31m"+'La Opción ' + opcion + ' Ingresada no es Valida!'+'\033[0;m')
         time.sleep(2)
 
 
@@ -63,12 +63,12 @@ def creacionUsuario(tipo):  # Paso 2
     system('cls')
     while(True):
         system('cls')
-        print(chr(27)+"[1;33m"+'Ingrese un Nombre de Usuario:')
+        print(chr(27)+"[1;33m"+'Ingrese un Nombre de Usuario:'+'\033[0;m')
         print()
         nick = input('» ').upper().strip()  # Ingreso Nickname en Mayuscula
         if nick == '' or nick == ' ':
             system('cls')
-            print(chr(27)+"[1;3;31m"+'Por Favor, Ingrese un Nombre de Usuario!')
+            print(chr(27)+"[1;3;31m"+'Por Favor, Ingrese un Nombre de Usuario!'+'\033[0;m')
             time.sleep(2)
         else:
             break
@@ -76,25 +76,25 @@ def creacionUsuario(tipo):  # Paso 2
     # ---Inicio verificacion de Nickname--->>
     if gamemaster_dao.buscarNombre(nick) or jugador_dao.buscarNombre(nick):
         system('cls')
-        print(chr(27)+"[1;31m"+'El nombre: ' + nick + ' ya esta en uso!')
+        print(chr(27)+"[1;31m"+'El nombre: ' + nick + ' ya esta en uso!'+'\033[0;m')
         time.sleep(2)
         return
     # ---Final verificacion de Nickname--->>
 
     while(True):
-        print(chr(27)+"[1;3;33m"+'Cree una Contraseña:')
+        print(chr(27)+"[1;3;33m"+'Cree una Contraseña:'+'\033[0;m')
         print()
         cc = input('» ').strip()  # Ingreso Contraseña
         if cc == '' or cc == ' ':
             system('cls')
-            print(chr(27)+"[1;3;31m"+'Debe ingresar una contraseña!')
+            print(chr(27)+"[1;3;31m"+'Debe ingresar una contraseña!'+'\033[0;m')
             time.sleep(2)
         else:
             break
 
     if tipo == 'gamemaster':
         system('cls')
-        print(chr(27)+"[1;3;33m"+'Inserte de que va su historia:')
+        print(chr(27)+"[1;3;33m"+'Inserte de que va su historia:'+'\033[0;m')
         print()
         lore = input('» ')
         #
@@ -114,7 +114,7 @@ while(enFunconamiento):
     print(chr(27)+"[1;4;37m"+'Menú'+'\033[0;m')
     print()
     print(chr(
-        27)+"[1;3;33m"+'» Seleccione que opcion desea ingresando el numero correspondiente a esta:')
+        27)+"[1;3;33m"+'» Seleccione que opcion desea ingresando el numero correspondiente a esta:'+'\033[0;m')
     time.sleep(4)
     system('cls')
     print(chr(27)+"[1;33m"+'1.- ' + chr(27)+"[0;37m"+'Inicio de Sesión')
@@ -136,5 +136,5 @@ while(enFunconamiento):
         
     else:
         system('cls')
-        print(chr(27)+"[1;3;31m"+'La Opción ' + seleccion + ' Ingresada no es Valida!')
+        print(chr(27)+"[1;3;31m"+'La Opción ' + seleccion + ' Ingresada no es Valida!'+'\033[0;m')
         time.sleep(2);

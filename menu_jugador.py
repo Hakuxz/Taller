@@ -15,7 +15,7 @@ from Personajes.personajes import personajes
 
 def pausarYvolver():
     system('cls')
-    print('1.- Volver: ')
+    print('\033[1;33m'+'1.- '+'\033[0;m'+'Volver: ')
     while(True):
         opcion = input('» ')
         if opcion == '1':
@@ -28,7 +28,9 @@ def pausarYvolver():
 def comprobarNumero(atributo):
     while(True):
         try:
-            print('\033[1;3;33m'+'Ingrese el valor de ' + atributo+'\033[0;m')
+            system('cls')
+            print('\033[1;3;33m'+'Ingrese el valor de ' + atributo +'\033[0;m')
+            print()
             numero = int(input('» '))
             if numero >= 0 and numero <= 10:
                 return numero
@@ -80,7 +82,7 @@ def crearPersonaje(id_jugador):
                 else:
                     while(True):
                         system('cls')
-                        print('Seleccione su equipo inicial: ')
+                        print('\033[1;3;33m'+'Seleccione su equipo inicial: '+'\033[0;m')
                         listaID = equipoDao.obtenerLista()
                         print()
                         id_equipo = input('» ')
@@ -95,12 +97,12 @@ def crearPersonaje(id_jugador):
                             return
                         else:
                             os.system('cls')
-                            print(chr(27)+"[1;31m"+'El Valor ' + id_equipo + ' no es Valido!')
-                            time.sleep(1)
+                            print(chr(27)+"[1;31m"+'El Valor ' + id_equipo + ' no es Valido!'+'\033[0;m')
+                            time.sleep(2)
         else:
             os.system('cls')
-            print(chr(27)+"[1;31m"+'El Valor ' + id_raza + ' no es Valido!')
-            time.sleep(1)
+            print(chr(27)+"[1;31m"+'El Valor ' + id_raza + ' no es Valido!'+'\033[0;m')
+            time.sleep(2)
             # Atributos del Personaje
 
     # Fin Creacion del Personaje
@@ -118,10 +120,10 @@ class menu_jugador():
                 'Seleccione que opcion desea ingresando el numero correspondiente a esta:'+'\033[0;m') 
             time.sleep(4)
             system('cls')
-            print(chr(27)+"[1;33m"+'1.- ' + chr(27) +
+            print(chr(27)+"[1;4;37m"+'1.- ' + chr(27) +
                   "[0;37m"+'Crear Personajes')
-            print(chr(27)+"[1;33m"+'2.- ' + chr(27) +
-                  "[0;37m"+'Ver Mis Personajes')
+            print()
+            print(chr(27)+"[1;33m"+'2.- ' + chr(27) + "[0;37m"+'Ver Mis Personajes')
             print(chr(27)+"[1;33m"+'3.- ' + chr(27)+"[0;37m"+'Ver Razas')
             print(chr(27)+"[1;33m"+'4.- ' + chr(27)+"[0;37m"+'Ver Poderes')
             print(chr(27)+"[1;33m"+'5.- ' + chr(27)+"[0;37m"+'Ver Habilidades')
@@ -129,7 +131,7 @@ class menu_jugador():
             print(chr(27)+"[1;33m"+'0.- ' + chr(27)+"[0;37m"+'Salir')
             print()
             seleccion = input('Opción: ')
-            system('cls')
+            
             if seleccion == '1':  # Crear Personajes
                 crearPersonaje(id_jugador)
                 pausarYvolver()
@@ -151,7 +153,9 @@ class menu_jugador():
                     elif opcion == '2':
                         break
                     else:
+                        system('cls')
                         print(+'\033[1;3;31m'+'Opción '+ opcion +' no Valida!'+'\033[0;m')
+                        time.sleep(2)
                 pausarYvolver()
             elif seleccion == '3':  # Ver Razas
                 razasDao.mostrar()
@@ -167,9 +171,10 @@ class menu_jugador():
                 pausarYvolver()
             elif seleccion == '0':  # Salir
                 print('\033[1;37m'+'Hasta Luego '+ nombre + '\033[0;m')
+                time.sleep(2)
                 enFuncionamiento = False
             else:
                 os.system('cls')
                 print(chr(27)+"[1;3;31m"+'La Opción ' +
-                      seleccion + ' Ingresada no es Valida!')
-                time.sleep(1)
+                      seleccion + ' Ingresada no es Valida!'+'\033[0;m')
+                time.sleep(2)
