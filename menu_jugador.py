@@ -36,7 +36,7 @@ def crearPersonaje(id_jugador):
     os.system('cls')
     print('>> Creacion de Personaje >>')
     print('Ingrese el nombre de su Personaje: ')
-    nombre_personaje = input('#: ').capitalize().strip()
+    nombre_personaje = input('#: ').strip().capitalize()
     # Raza del Personaje
     while(True):
         print('Seleccione la Raza de su Personaje: ')

@@ -86,7 +86,7 @@ class menu_gamemaster():
                         while(volver):
                                 print('Seleccione el personaje que desea ver: ')
                                 listaID = personajesDao.obtenerLista()
-                                personaje = int(input('#: '))
+                                personaje = input('#: ')
                                 if personaje in listaID:
                                     personajesDao.obtenerPersonajePorID(personaje)
                                     volver = False
