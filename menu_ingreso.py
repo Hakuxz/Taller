@@ -1,4 +1,4 @@
-import os
+from os import  system
 import time
 from coneccion import coneccion
 from t_jugador import t_jugador
@@ -16,7 +16,7 @@ enFunconamiento = True
 
 
 def ingresoUsuario():
-    os.system('cls')
+    system('cls')
     print(chr(27)+"[1;4;37m"+'Iniciar Sesión'+'\033[0;m')
     print()
     print(chr(27)+"[1;3;33m"+'Ingrese su Nombre de Usuario: ')
@@ -33,13 +33,13 @@ def ingresoUsuario():
         menu = menu_gamemaster(enFunconamiento, nnUsuario,
                                jugador_dao.obtenerID(nnUsuario))
     else:
-        os.system('cls')
+        system('cls')
         print(chr(27)+"[1;31m"+'Su Nombre o Contraseña no son validos!')
         time.sleep(1)
 
 
 def crearUsuario():  # Paso 1
-    os.system('cls')
+    system('cls')
     print(chr(27)+"[1;4;37m"+'Creacion de Usuario'+'\033[0;m')
     print('')
     print(chr(27)+"[1;33m"+'1.- '+ chr(27)+"[0;37m"+'Crear Usuario Gamemaster')
@@ -54,20 +54,20 @@ def crearUsuario():  # Paso 1
     elif opcion == '3':
         return
     else:
-        os.system('cls')
-        print(chr(27)+"[1;31m"+'La Opción ' + seleccion + ' Ingresada no es Valida!')
-        time.sleep(1)
+        system('cls')
+        print(chr(27)+"[1;31m"+'La Opción ' + opcion + ' Ingresada no es Valida!')
+        time.sleep(2)
 
 
 def creacionUsuario(tipo):  # Paso 2
-    os.system('cls')
+    system('cls')
     while(True):
-        os.system('cls')
+        system('cls')
         print(chr(27)+"[1;33m"+'Ingrese un Nombre de Usuario:')
         print()
         nick = input('» ').upper().strip()  # Ingreso Nickname en Mayuscula
         if nick == '' or nick == ' ':
-            os.system('cls')
+            system('cls')
             print(chr(27)+"[1;3;31m"+'Por Favor, Ingrese un Nombre de Usuario!')
             time.sleep(2)
         else:
@@ -75,7 +75,7 @@ def creacionUsuario(tipo):  # Paso 2
 
     # ---Inicio verificacion de Nickname--->>
     if gamemaster_dao.buscarNombre(nick) or jugador_dao.buscarNombre(nick):
-        os.system('cls')
+        system('cls')
         print(chr(27)+"[1;31m"+'El nombre: ' + nick + ' ya esta en uso!')
         time.sleep(2)
         return
@@ -86,12 +86,14 @@ def creacionUsuario(tipo):  # Paso 2
         print()
         cc = input('» ').strip()  # Ingreso Contraseña
         if cc == '' or cc == ' ':
-            print(chr(27)+"[1;3;31m"+'Debe ingresar una contraseña')
+            system('cls')
+            print(chr(27)+"[1;3;31m"+'Debe ingresar una contraseña!')
+            time.sleep(2)
         else:
             break
 
     if tipo == 'gamemaster':
-        os.system('cls')
+        system('cls')
         print(chr(27)+"[1;3;33m"+'Inserte de que va su historia:')
         print()
         lore = input('» ')
@@ -108,16 +110,17 @@ def creacionUsuario(tipo):  # Paso 2
 # Menu ---------------------------------------->>
 while(enFunconamiento):
     time.sleep(1)
-    os.system('cls')
+    system('cls')
     print(chr(27)+"[1;4;37m"+'Menú'+'\033[0;m')
+    print()
     print(chr(
         27)+"[1;3;33m"+'» Seleccione que opcion desea ingresando el numero correspondiente a esta:')
     time.sleep(4)
-    os.system('cls')
+    system('cls')
     print(chr(27)+"[1;33m"+'1.- ' + chr(27)+"[0;37m"+'Inicio de Sesión')
     print(chr(27)+"[1;33m"+'2.- ' + chr(27)+"[0;37m"+'Crear Usuario')
     print(chr(27)+"[1;33m"+'3.- ' + chr(27)+"[0;37m"+'Salir')
-    print('')
+    print()
     seleccion = input('Opción: ')
     # ------------------------------------------>>
     if seleccion == '1':
@@ -125,14 +128,13 @@ while(enFunconamiento):
     elif seleccion == '2':
         crearUsuario()
     elif seleccion == '3':
-        os.system('cls')
+        system('cls')
         print("\033[1;3;36m"+'Cerrando Sistema, Hasta Pronto!' + "\033[0;m")
         enFunconamiento = False
         time.sleep(2) 
-        os.system('cls')
+        system('cls')
         
     else:
-        os.system('cls')
-        print(chr(27)+"[1;3;31m"+'La Opción ' +
-              seleccion + ' Ingresada no es Valida!')
-        time.sleep(1)
+        system('cls')
+        print(chr(27)+"[1;3;31m"+'La Opción ' + seleccion + ' Ingresada no es Valida!')
+        time.sleep(2);

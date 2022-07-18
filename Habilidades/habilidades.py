@@ -19,4 +19,4 @@ class habilidades:
 
     @property # ------------------------------------->>
     def raza(self) -> int:
-        return self.__id_razas
+        return self.__id_raza
