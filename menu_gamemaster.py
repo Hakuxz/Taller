@@ -16,7 +16,6 @@ from Razas.razas import razas
 from Habilidades.habilidades import habilidades
 #
 
-
 def pausarYvolver():
     print('1.- Volver: ')
     while(True):

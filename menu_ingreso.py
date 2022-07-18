@@ -28,7 +28,7 @@ def ingresoUsuario():
     else:
         print('Los Datos Ingresado no Coinciden')
 
-def crearUsuario(): # Paso 1
+def crearUsuario(): # Menu 1 Crear Usuario
     os.system('cls')
     print('>> Crear Usuario >>')
     print('1.- Crear usuario GameMaster')
@@ -44,12 +44,12 @@ def crearUsuario(): # Paso 1
     else:
         print('Valor Ingresado no Valido: '+seleccion)
 
-def creacionUsuario(tipo): # Paso 2
+def creacionUsuario(tipo): # Menu 2 Crear Usuario
     os.system('cls')
     while(True):
         print('Seleccione un NickName:')
         nick = input('#: ').upper().strip() # Ingreso Nickname en Mayuscula
-        if nick == '' or nick == ' ':
+        if nick == '' or nick == ' ': # Por si acaso
             print('Debe ingresar un nombre Valido')
         else:
             break
