@@ -14,7 +14,7 @@ from Personajes.personajes import personajes
 
 
 def pausarYvolver():
-    system('cls')
+    print()
     print('\033[1;33m'+'1.- '+'\033[0;m'+'Volver: ')
     while(True):
         opcion = input('» ')
@@ -120,9 +120,7 @@ class menu_jugador():
                 'Seleccione que opcion desea ingresando el numero correspondiente a esta:'+'\033[0;m') 
             time.sleep(4)
             system('cls')
-            print(chr(27)+"[1;4;37m"+'1.- ' + chr(27) +
-                  "[0;37m"+'Crear Personajes')
-            print()
+            print(chr(27)+"[1;33m"+'1.- ' + chr(27) +"[0;37m"+'Crear Personajes')
             print(chr(27)+"[1;33m"+'2.- ' + chr(27) + "[0;37m"+'Ver Mis Personajes')
             print(chr(27)+"[1;33m"+'3.- ' + chr(27)+"[0;37m"+'Ver Razas')
             print(chr(27)+"[1;33m"+'4.- ' + chr(27)+"[0;37m"+'Ver Poderes')
@@ -157,18 +155,30 @@ class menu_jugador():
                         print(+'\033[1;3;31m'+'Opción '+ opcion +' no Valida!'+'\033[0;m')
                         time.sleep(2)
                 pausarYvolver()
+                
             elif seleccion == '3':  # Ver Razas
+                system('cls')
                 razasDao.mostrar()
                 pausarYvolver()
+
             elif seleccion == '4':  # Ver Poderes
+                system('cls')
                 poderesDao.mostrar()
+                time.sleep(5)
                 pausarYvolver()
+
             elif seleccion == '5':  # Ver Habilidades
+                system('cls')
                 habilidadesDao.mostrar()
+                time.sleep(5)
                 pausarYvolver()
+
             elif seleccion == '6':  # Ver Equipos
+                system('cls')
                 equipoDao.mostrar()
+                time.sleep(5)
                 pausarYvolver()
+
             elif seleccion == '0':  # Salir
                 print('\033[1;37m'+'Hasta Luego '+ nombre + '\033[0;m')
                 time.sleep(2)

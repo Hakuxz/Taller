@@ -19,6 +19,7 @@ from Habilidades.habilidades import habilidades
 
 
 def pausarYvolver():
+    print()
     print('\033[1;33m'+'1.- '+'Volver: '+'\033[0;m')
     while(True):
         opcion = input('» ').strip()
@@ -85,7 +86,6 @@ class menu_gamemaster():
             print('\033[1;33m'+'6.- '+'\033[0;m'+'Salir'+'\033[0;m')
             print()
             seleccion = input('Opción: ').strip()
-            os.system('cls')
             # >>
             if seleccion == '1':  # Personajes
                 while(True):
@@ -105,12 +105,13 @@ class menu_gamemaster():
                                     print('\033[1;3;31m'+'Valor '+ personaje +' no Valido: '+'\033[0;m')
                         volver = True
                         while(volver):
-                                system('cls')
                                 print('\033[1;3;33m'+'Que desea hacer con el personaje seleccionado: '+'\033[0;m')
+                                print()
                                 print('\033[1;33m'+'1.-'+'\033[0;m'+'Otorgar experiencia')
                                 print('\033[1;33m'+'2.-'+'\033[0;m'+'Cambiar su estado')
                                 print('\033[1;33m'+'3.-'+'\033[0;m'+'Borrar')
                                 print('\033[1;33m'+'4.-'+'\033[0;m'+'Volver')
+                                print()
                                 opcion = input('» ').strip()
                                 if opcion == '1':
                                     print('\033[1;3;33m'+'Introdusca la experiencia optenida: '+'\033[0;m')
@@ -124,11 +125,15 @@ class menu_gamemaster():
                                     volver = False
                                     break
                                 else:
+                                    system('cls')
                                     print('\033[1;3;31m'+'Valor '+opcion+' no Valido: '+'\033[0;m')
+                                    time.sleep(2)
                     elif opcion == '3':
                         break
                     else:
+                        system('cls')
                         print('\033[1;3;m'+'Valor '+opcion+' no Valido: '+'\033[0;m')
+                        time.sleep(2)
             # >>
             elif seleccion == '2': # Razas
                 while(True):
@@ -161,22 +166,27 @@ class menu_gamemaster():
                                 razasDao.mostrarPorID(ver_raza)
                                 break
                             else:
+                                system('cls')
                                 print('\033[1;3;31m'+'Valor '+ver_raza+' no Valido: '+'\033[0;m')
+                                time.sleep(2)
                     elif opcion == '4': # >> Editar
                         while(True):
-                            system('cls')
                             print('\033[1;3;33m'+'Seleccione la raza que desea editar, las razas basicas no pueden ser editadas: '+'\033[0;m')
                             print()
                             listaID = razasDao.obtenerListaEdicion()
                             editar_raza = input('» ').strip()
                             if editar_raza in listaID:
                                 if editar_raza == '0' or editar_raza == '1' or editar_raza == '2' or editar_raza == '3':
+                                    system('cls')
                                     print('\033[1;3;31m'+'Lo sentimos pero las razas basicas no son modificables'+'\033[0;m')
+                                    time.sleep(2)
                                     break
                                 razasDao.mostrarPorID(editar_raza)
                             else:
                                 print('\033[1;3;31m'+'Valor '+ opcion +' no Valido: '+'\033[0;m')
+
                             print('\033[1;3;33m'+'Que desea modificar de la raza: '+ razasDao.obtenerNombre(editar_raza)+'\033[0;m')
+                            print()
                             print('\033[1;33m'+'1.- '+'\033[0;m'+'Nombre'+'\033[0;m') 
                             print('\033[1;33m'+'2.- '+'\033[0;m'+'Fuerza'+'\033[0;m')
                             print('\033[1;33m'+'3.- '+'\033[0;m'+'Destreza'+'\033[0;m')
